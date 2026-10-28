@@ -1,0 +1,31 @@
+BITÁCORA - RUEDA LIBRE
+
+== 1. Petición del documento (Network) ==
+URL completa: http://127.0.0.1:5500/index.html
+Protocolo:    http
+Host:         127.0.0.1
+Puerto:       5500
+Ruta:         /index.html
+Método:       GET
+Código:       200 OK (el servidor encontró y envió la página)
+
+Ruta inexistente: http://127.0.0.1:5500/promociones.html
+Código:       404 Not Found (el recurso no existe en el servidor)
+
+== 2. Roles de HTML, CSS y JavaScript ==
+HTML: estructura y contenido. Ej: la tabla de tarifas.
+CSS:  presentación visual. Ej: colores de marca y menú horizontal.
+JS:   comportamiento. Ej: validar el formulario de reservas.
+
+== 3. Tabla de rutas relativas ==
+Origen                 -> Destino               -> Ruta escrita
+index.html             -> index.html            -> index.html
+index.html             -> paginas/tarifas.html  -> paginas/tarifas.html
+index.html             -> paginas/reservas.html -> paginas/reservas.html
+paginas/tarifas.html   -> index.html            -> ../index.html
+paginas/tarifas.html   -> paginas/tarifas.html  -> tarifas.html
+paginas/tarifas.html   -> paginas/reservas.html -> reservas.html
+paginas/reservas.html  -> index.html            -> ../index.html
+paginas/reservas.html  -> paginas/tarifas.html  -> tarifas.html
+paginas/reservas.html  -> paginas/reservas.html -> reservas.html
+paginas/tarifas.html   -> img/logo.png          -> ../img/logo.png

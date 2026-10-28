@@ -1,0 +1,87 @@
+BITÁCORA - RUEDA LIBRE
+
+== 1. Petición del documento (Network) ==
+URL completa: http://127.0.0.1:5500/index.html
+Protocolo:    http
+Host:         127.0.0.1
+Puerto:       5500
+Ruta:         /index.html
+Método:       GET
+Código:       200 OK (el servidor encontró y envió la página)
+
+Ruta inexistente: http://127.0.0.1:5500/promociones.html
+Código:       404 Not Found (el recurso no existe en el servidor)
+
+== 2. Roles de HTML, CSS y JavaScript ==
+HTML: estructura y contenido. Ej: la tabla de tarifas.
+CSS:  presentación visual. Ej: colores de marca y menú horizontal.
+JS:   comportamiento. Ej: validar el formulario de reservas.
+
+== 3. Tabla de rutas relativas ==
+Origen                 -> Destino               -> Ruta escrita
+index.html             -> index.html            -> index.html
+index.html             -> paginas/tarifas.html  -> paginas/tarifas.html
+index.html             -> paginas/reservas.html -> paginas/reservas.html
+paginas/tarifas.html   -> index.html            -> ../index.html
+paginas/tarifas.html   -> paginas/tarifas.html  -> tarifas.html
+paginas/tarifas.html   -> paginas/reservas.html -> reservas.html
+paginas/reservas.html  -> index.html            -> ../index.html
+paginas/reservas.html  -> paginas/tarifas.html  -> tarifas.html
+paginas/reservas.html  -> paginas/reservas.html -> reservas.html
+paginas/tarifas.html   -> img/logo.png          -> ../img/logo.png
+
+== 4. Esquema de regiones (MiniReto 5) ==
+index.html:    header(h1 + nav) > main(section x4; "Nuestros servicios" con 3 article) > footer
+tarifas.html:  header(logo + nombre + nav) > main(h1, section tarifas, section #recorridos, section info con aside "Qué llevar") > footer
+reservas.html: header(logo + nombre + nav) > main(h1, aside horario) > footer
+div/span: no se usó ninguno; todas las regiones tienen etiqueta semántica.
+
+== 5. Justificación de controles (MiniReto 6) ==
+Tipo de bicicleta -> radio: son 3 opciones excluyentes y conviene verlas todas a la vez.
+Plan / recorrido  -> select: lista cerrada de opciones; ahorra espacio.
+Políticas         -> checkbox: es una sola decisión de sí o no.
+
+== 6. Pruebas de validación (MiniReto 7) ==
+Campo      | Dato de prueba | Esperado  | Obtenido
+Nombre     | "Jo"           | Rechaza   | Rechaza (mín. 3)
+Documento  | "12ab45"       | Rechaza   | Rechaza (pattern)
+Documento  | "12345"        | Rechaza   | Rechaza (6-10 dígitos)
+Correo     | "hola@"        | Rechaza   | Rechaza (type email)
+Celular    | 3001234567     | Acepta    | Acepta
+Celular    | 1234567890     | Rechaza   | Rechaza (no empieza por 3)
+Celular    | 300123         | Rechaza   | Rechaza (menos de 10)
+Fecha      | 2026-10-31     | Rechaza   | Rechaza (min)
+Cantidad   | 7              | Rechaza   | Rechaza (max 6)
+Políticas  | sin marcar     | Rechaza   | Rechaza (required)
+Teclado: orden Tab lógico (datos -> alquiler -> confirmación -> botón); flechas en radios, espacio en checkbox, Enter envía.
+
+== 7. Auditoría de accesibilidad (MiniReto 8) ==
+Revisado OK: lang="es" en las 3 páginas, un h1 por página sin saltos, alt en fotos, recorrido con teclado.
+Hallazgo -> Corrección
+1. Enlace "mira cómo llegar" no se entiende solo -> "cómo llegar a nuestra sede".
+2. Enlace al mapa abre otra pestaña sin avisar -> se agregó "(se abre en otra pestaña)".
+3. Logo en header repite el nombre que está al lado -> alt="" (decorativo).
+4. "Reservar ahora" repetido sin contexto -> "Reservar ahora tu bicicleta" / "Reservar un recorrido guiado".
+5. Formato de documento, celular y rango de fecha solo en title (invisible) -> texto de ayuda visible con <small>.
+6. Menú no indica la página actual -> aria-current="page".
+
+== 8. Contraste de la paleta (WCAG) ==
+Combinación              | Ratio  | Clasificación
+Blanco / Verde Ruta      | 5.31:1 | Apta texto normal
+Blanco / Naranja Pedal   | 2.22:1 | No apta
+Azul Noche / Naranja     | 7.20:1 | Apta texto normal
+Azul Noche / Crema       | 14.83:1| Apta texto normal
+Gris Asfalto / Crema     | 5.57:1 | Apta texto normal
+Verde Ruta / Crema       | 4.93:1 | Apta texto normal
+Naranja Pedal / Crema    | 2.06:1 | No apta
+Blanco / Azul Noche      | 15.97:1| Apta texto normal
+
+Mapa de uso de color:
+- Fondo general: Crema. Texto y títulos: Azul Noche. Texto secundario: Gris Asfalto.
+- Enlaces: Verde Ruta. Botón principal: fondo Verde Ruta, texto blanco.
+- Botón secundario/destacados: fondo Naranja Pedal con texto Azul Noche (nunca blanco).
+- Header/footer: fondo Azul Noche, texto blanco.
+- Naranja nunca como color de texto sobre Crema.
+
+== 9. Publicación ==
+URL GitHub Pages: https://TU_USUARIO.github.io/rueda-libre/

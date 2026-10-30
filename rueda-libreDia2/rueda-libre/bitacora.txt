@@ -84,4 +84,4 @@ Mapa de uso de color:
 - Naranja nunca como color de texto sobre Crema.
 
 == 9. Publicación ==
-URL GitHub Pages: https://TU_USUARIO.github.io/rueda-libre/
+URL GitHub Pages: https://github.com/mariangeles05/CSS_HTML_trayectoria1.git

@@ -84,7 +84,7 @@ Mapa de uso de color:
 - Naranja nunca como color de texto sobre Crema.
 
 == 9. Publicación ==
-URL GitHub Pages: https://TU_USUARIO.github.io/rueda-libre/
+URL GitHub Pages: https://github.com/mariangeles05/CSS_HTML_trayectoria1.git
 
 == 10. Herencia (MiniReto 9) ==
 Se hereda: font-family. Un <p> muestra "Open Sans" en Computed aunque solo se declaró en body.
@@ -108,7 +108,7 @@ border-box:   928 px (padding y borde quedan incluidos en el ancho).
 - WhatsApp: position:fixed abajo a la derecha; body con padding-bottom para no tapar el pie.
 - styles.css reorganizado: variables, base, navegación, componentes, formulario. Sin duplicados.
 - Revisión: 0 errores 404, sin estilos en línea, foco visible con Tab en las 3 páginas.
-URL v1.0: https://TU_USUARIO.github.io/rueda-libre/
+URL v1.0: https://github.com/mariangeles05/CSS_HTML_trayectoria1.git
 
 == 14. Cierre de la semana ==
 MR1-4: repositorio, inicio, tarifas con tablas, reservas y menú (v0.1).

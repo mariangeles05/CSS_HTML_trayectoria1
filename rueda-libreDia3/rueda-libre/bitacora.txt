@@ -1,23 +1,38 @@
 BITÁCORA - RUEDA LIBRE
 
 == 1. Petición del documento (Network) ==
+
+Abrí el proyecto con Live Server y en DevTools, pestaña Network, recargué la página para ver qué pedía el navegador. La primera petición que aparece es la del documento, y de ahí saqué estos datos:
+
 URL completa: http://127.0.0.1:5500/index.html
 Protocolo:    http
-Host:         127.0.0.1
-Puerto:       5500
+Host:         127.0.0.1 (es mi propio computador, por eso no es un dominio)
+Puerto:       5500 (el que usa Live Server por defecto)
 Ruta:         /index.html
 Método:       GET
-Código:       200 OK (el servidor encontró y envió la página)
+Código:       200 OK
+
+El 200 quiere decir que el servidor encontró la página y me la envió sin problema. Después escribí a mano una ruta que no existe para ver qué pasaba:
 
 Ruta inexistente: http://127.0.0.1:5500/promociones.html
-Código:       404 Not Found (el recurso no existe en el servidor)
+Código:           404 Not Found
+
+Ahí el servidor responde, pero dice que ese archivo no lo tiene. Me sirvió para entender que el 404 no es que el servidor esté caído, sino que lo que pedí no está.
 
 == 2. Roles de HTML, CSS y JavaScript ==
-HTML: estructura y contenido. Ej: la tabla de tarifas.
-CSS:  presentación visual. Ej: colores de marca y menú horizontal.
-JS:   comportamiento. Ej: validar el formulario de reservas.
+
+Lo pensé con el mismo proyecto de Rueda Libre para no quedarme solo en la definición:
+
+HTML es la estructura y el contenido. Por ejemplo, la tabla de tarifas: qué filas y columnas hay y qué dice cada una.
+CSS es cómo se ve. Por ejemplo, los colores de la marca y que el menú quede horizontal en vez de una lista hacia abajo.
+JavaScript es el comportamiento. Por ejemplo, revisar el formulario de reservas antes de enviarlo y avisar si falta algo.
+
+Si quito el CSS la página sigue teniendo todo el contenido, solo que se ve plana. Si quito el HTML no queda nada. Esa fue la forma más fácil que encontré de diferenciarlos.
 
 == 3. Tabla de rutas relativas ==
+
+Para esta tabla lo que me sirvió fue pensar siempre desde dónde está el archivo en el que escribo el enlace. Si estoy dentro de la carpeta paginas y quiero ir a index.html, tengo que salir una carpeta, y eso es el ../ . Si los dos archivos están en la misma carpeta, basta con el nombre.
+
 Origen                 -> Destino               -> Ruta escrita
 index.html             -> index.html            -> index.html
 index.html             -> paginas/tarifas.html  -> paginas/tarifas.html
@@ -30,88 +45,140 @@ paginas/reservas.html  -> paginas/tarifas.html  -> tarifas.html
 paginas/reservas.html  -> paginas/reservas.html -> reservas.html
 paginas/tarifas.html   -> img/logo.svg          -> ../img/logo.svg
 
+El último caso es el del logo. Desde tarifas.html tengo que salir de paginas y luego entrar a img. Si se me olvida el ../ la imagen no carga, y en Network se ve como un 404, así que es fácil detectar el error.
+
 == 4. Esquema de regiones (MiniReto 5) ==
-index.html:    header(h1 + nav) > main(section x4; "Nuestros servicios" con 3 article) > footer
-tarifas.html:  header(logo + nombre + nav) > main(h1, section tarifas, section #recorridos, section info con aside "Qué llevar") > footer
-reservas.html: header(logo + nombre + nav) > main(h1, aside horario) > footer
-div/span: no se usó ninguno; todas las regiones tienen etiqueta semántica.
+
+Antes de tocar el código hice el esquema de cada página para ver qué región iba dentro de cuál. Quedó así:
+
+index.html:    header (h1 + nav) > main (4 section; la de "Nuestros servicios" tiene 3 article) > footer
+tarifas.html:  header (logo + nombre + nav) > main (h1, section de tarifas, section #recorridos, section de información con un aside "Qué llevar") > footer
+reservas.html: header (logo + nombre + nav) > main (h1, aside con el horario) > footer
+
+No usé ningún div ni span. Cada parte tiene una etiqueta semántica que dice lo que es: los servicios son article porque cada uno se entiende solo, y "Qué llevar" y el horario son aside porque son información de apoyo, no el contenido principal de la página.
 
 == 5. Justificación de controles (MiniReto 6) ==
-Tipo de bicicleta -> radio: son 3 opciones excluyentes y conviene verlas todas a la vez.
-Plan / recorrido  -> select: lista cerrada de opciones; ahorra espacio.
-Políticas         -> checkbox: es una sola decisión de sí o no.
+
+Para el formulario de reservas no escogí los controles al azar, sino según cómo responde la persona:
+
+Tipo de bicicleta -> radio. Son 3 opciones y solo se puede escoger una. Con radio se ven todas al mismo tiempo y la persona compara sin abrir nada.
+Plan o recorrido  -> select. Es una lista cerrada con más opciones, y en un desplegable ocupa mucho menos espacio.
+Políticas         -> checkbox. Es una sola decisión de sí o no: acepto o no acepto.
 
 == 6. Pruebas de validación (MiniReto 7) ==
-Campo      | Dato de prueba | Esperado  | Obtenido
-Nombre     | "Jo"           | Rechaza   | Rechaza (mín. 3)
-Documento  | "12ab45"       | Rechaza   | Rechaza (pattern)
-Documento  | "12345"        | Rechaza   | Rechaza (6-10 dígitos)
-Correo     | "hola@"        | Rechaza   | Rechaza (type email)
-Celular    | 3001234567     | Acepta    | Acepta
-Celular    | 1234567890     | Rechaza   | Rechaza (no empieza por 3)
-Celular    | 300123         | Rechaza   | Rechaza (menos de 10)
-Fecha      | 2026-10-31     | Rechaza   | Rechaza (min)
-Cantidad   | 7              | Rechaza   | Rechaza (max 6)
-Políticas  | sin marcar     | Rechaza   | Rechaza (required)
-Teclado: orden Tab lógico (datos -> alquiler -> confirmación -> botón); flechas en radios, espacio en checkbox, Enter envía.
+
+Probé cada campo con datos que deberían pasar y con datos que no, para confirmar que la validación nativa de HTML hiciera su trabajo:
+
+Campo      | Dato de prueba | Esperado | Obtenido
+Nombre     | "Jo"           | Rechaza  | Rechaza (mínimo 3 caracteres)
+Documento  | "12ab45"       | Rechaza  | Rechaza (pattern, solo números)
+Documento  | "12345"        | Rechaza  | Rechaza (debe tener de 6 a 10 dígitos)
+Correo     | "hola@"        | Rechaza  | Rechaza (type="email")
+Celular    | 3001234567     | Acepta   | Acepta
+Celular    | 1234567890     | Rechaza  | Rechaza (no empieza por 3)
+Celular    | 300123         | Rechaza  | Rechaza (menos de 10 dígitos)
+Fecha      | 2026-10-31     | Rechaza  | Rechaza (es anterior al min)
+Cantidad   | 7              | Rechaza  | Rechaza (el máximo es 6)
+Políticas  | sin marcar     | Rechaza  | Rechaza (required)
+
+Todos los resultados coincidieron con lo esperado. El del celular 1234567890 me pareció importante porque tiene los 10 dígitos, pero igual lo rechaza porque en Colombia los celulares empiezan por 3.
+
+También recorrí el formulario solo con el teclado. El orden del Tab es lógico: primero los datos personales, después lo del alquiler, después la confirmación y al final el botón. En los radios me muevo con las flechas, el checkbox se marca con la barra espaciadora y con Enter se envía.
 
 == 7. Auditoría de accesibilidad (MiniReto 8) ==
-Revisado OK: lang="es" en las 3 páginas, un h1 por página sin saltos, alt en fotos, recorrido con teclado.
-Hallazgo -> Corrección
-1. Enlace "mira cómo llegar" no se entiende solo -> "cómo llegar a nuestra sede".
-2. Enlace al mapa abre otra pestaña sin avisar -> se agregó "(se abre en otra pestaña)".
-3. Logo en header repite el nombre que está al lado -> alt="" (decorativo).
-4. "Reservar ahora" repetido sin contexto -> "Reservar ahora tu bicicleta" / "Reservar un recorrido guiado".
-5. Formato de documento, celular y rango de fecha solo en title (invisible) -> texto de ayuda visible con <small>.
-6. Menú no indica la página actual -> aria-current="page".
+
+Primero revisé lo básico y estaba bien: lang="es" en las 3 páginas, un solo h1 por página sin saltar niveles de títulos, alt en las fotos y se puede recorrer todo con el teclado.
+
+Después busqué cosas que se pudieran mejorar. Encontré seis:
+
+1. El enlace "mira cómo llegar" no se entiende si se lee solo (un lector de pantalla puede listar los enlaces sin el texto de alrededor). Lo cambié por "cómo llegar a nuestra sede".
+2. El enlace al mapa abría otra pestaña sin avisar. Le agregué "(se abre en otra pestaña)".
+3. El logo del header tenía un alt que repetía el nombre del negocio, que ya está escrito al lado. Le dejé alt="" porque ahí es decorativo y si no el lector lo dice dos veces.
+4. "Reservar ahora" estaba repetido sin contexto. Ahora uno dice "Reservar ahora tu bicicleta" y el otro "Reservar un recorrido guiado".
+5. El formato del documento, del celular y el rango de fechas solo estaba en el title, que no se ve a menos que pases el mouse. Lo puse como texto de ayuda visible con <small>.
+6. El menú no indicaba en qué página estás. Le agregué aria-current="page" al enlace de la página actual.
 
 == 8. Contraste de la paleta (WCAG) ==
-Combinación              | Ratio  | Clasificación
-Blanco / Verde Ruta      | 5.31:1 | Apta texto normal
-Blanco / Naranja Pedal   | 2.22:1 | No apta
-Azul Noche / Naranja     | 7.20:1 | Apta texto normal
-Azul Noche / Crema       | 14.83:1| Apta texto normal
-Gris Asfalto / Crema     | 5.57:1 | Apta texto normal
-Verde Ruta / Crema       | 4.93:1 | Apta texto normal
-Naranja Pedal / Crema    | 2.06:1 | No apta
-Blanco / Azul Noche      | 15.97:1| Apta texto normal
 
-Mapa de uso de color:
-- Fondo general: Crema. Texto y títulos: Azul Noche. Texto secundario: Gris Asfalto.
-- Enlaces: Verde Ruta. Botón principal: fondo Verde Ruta, texto blanco.
-- Botón secundario/destacados: fondo Naranja Pedal con texto Azul Noche (nunca blanco).
-- Header/footer: fondo Azul Noche, texto blanco.
-- Naranja nunca como color de texto sobre Crema.
+Revisé cada combinación de colores de la marca con un verificador de contraste. Para texto normal se necesita mínimo 4.5:1.
+
+Combinación             | Ratio   | Clasificación
+Blanco / Verde Ruta     | 5.31:1  | Apta texto normal
+Blanco / Naranja Pedal  | 2.22:1  | No apta
+Azul Noche / Naranja    | 7.20:1  | Apta texto normal
+Azul Noche / Crema      | 14.83:1 | Apta texto normal
+Gris Asfalto / Crema    | 5.57:1  | Apta texto normal
+Verde Ruta / Crema      | 4.93:1  | Apta texto normal
+Naranja Pedal / Crema   | 2.06:1  | No apta
+Blanco / Azul Noche     | 15.97:1 | Apta texto normal
+
+Lo que más me sorprendió fue el naranja: es el color más llamativo de la marca, pero con blanco o sobre crema no se lee bien. Por eso lo uso solo como fondo, con texto Azul Noche encima.
+
+Con eso armé el mapa de uso de color:
+- Fondo general: Crema. Textos y títulos: Azul Noche. Texto secundario: Gris Asfalto.
+- Enlaces: Verde Ruta. Botón principal: fondo Verde Ruta con texto blanco.
+- Botón secundario y destacados: fondo Naranja Pedal con texto Azul Noche (nunca blanco).
+- Header y footer: fondo Azul Noche con texto blanco.
+- El naranja nunca va como color de texto sobre crema.
 
 == 9. Publicación ==
-URL GitHub Pages: https://github.com/mariangeles05/CSS_HTML_trayectoria1.git
+
+Subí el proyecto a GitHub y activé GitHub Pages.
+
+Repositorio:  https://github.com/mariangeles05/CSS_HTML_trayectoria1
+GitHub Pages: https://mariangeles05.github.io/CSS_HTML_trayectoria1/
 
 == 10. Herencia (MiniReto 9) ==
-Se hereda: font-family. Un <p> muestra "Open Sans" en Computed aunque solo se declaró en body.
-No se hereda: background-color. El <p> muestra "rgba(0,0,0,0)" (transparente); se ve crema por el fondo del body.
+
+Para comprobar la herencia seleccioné un <p> y miré la pestaña Computed en DevTools.
+
+Lo que sí se hereda: font-family. El <p> muestra "Open Sans" aunque esa fuente solo la declaré en el body. El párrafo la toma del padre sin que yo se la ponga.
+
+Lo que no se hereda: background-color. El <p> muestra rgba(0,0,0,0), o sea transparente. Se ve crema, pero no porque tenga ese color, sino porque deja ver el fondo del body que está detrás. Esto me pareció curioso porque a simple vista uno pensaría que sí lo heredó.
 
 == 11. Conflicto de especificidad (MiniReto 10) ==
-#menu a  -> (1,0,1)  un id + un elemento
+
+Le puse la clase .activo al enlace de la página actual para pintarlo distinto, pero el color no cambiaba. Revisando en DevTools vi que el color de .activo aparecía tachado, y era por esto:
+
+#menu a  -> (1,0,1)  un id y un elemento
 .activo  -> (0,1,0)  una clase
-Causa: gana #menu a por tener id; en DevTools el color de .activo aparece tachado.
-Solución: selector #menu a.activo -> (1,1,1), sin !important.
-Contraste de estados: gris/blanco 6.0:1, verde/blanco 5.31:1, hover azul/blanco 15.97:1, botón blanco/verde 5.31:1.
-Ajuste al mapa de color: header con fondo blanco (gris/Azul Noche solo da 2.66:1).
+
+Gana #menu a porque tiene un id, y un id pesa más que cualquier cantidad de clases. La solución fue escribir el selector #menu a.activo, que da (1,1,1) y le gana al otro. No usé !important, porque eso arregla el problema en el momento pero después complica cualquier cambio.
+
+También revisé el contraste de los estados del menú: gris sobre blanco 6.0:1, verde sobre blanco 5.31:1, hover azul sobre blanco 15.97:1 y el botón blanco sobre verde 5.31:1. Todos pasan.
+
+Tuve que hacer un ajuste al mapa de color: el header pasó a tener fondo blanco, porque el gris sobre Azul Noche solo daba 2.66:1 y no se leía bien.
 
 == 12. Medición de tarjeta (MiniReto 11) ==
-Ventana de 1280 px, tarjeta con width:100%, padding 1.5rem y borde 1px.
-content-box: 1010 px (contenido 960 + 48 de padding + 2 de borde; se sale del main).
-border-box:   928 px (padding y borde quedan incluidos en el ancho).
+
+Medí la tarjeta en una ventana de 1280 px. La tarjeta tiene width:100% (el main mide 960 px), padding de 1.5rem (24 px por lado) y borde de 1 px.
+
+content-box: 1010 px de ancho total. El width se aplica solo al contenido (960), y encima se suman 48 de padding y 2 de borde. Por eso la tarjeta se sale del main.
+border-box:  960 px de ancho total. El padding y el borde quedan por dentro del width, así que el contenido se reduce a 910 px y la tarjeta cabe exacta en el main.
+
+Por eso dejé box-sizing: border-box para todo el sitio: así el ancho que escribo es el ancho que se ve.
 
 == 13. Lanzamiento v1.0 (MiniReto 12) ==
-- "Nuevo": .tarjeta con position:relative y .etiqueta con position:absolute (top/right).
-- WhatsApp: position:fixed abajo a la derecha; body con padding-bottom para no tapar el pie.
-- styles.css reorganizado: variables, base, navegación, componentes, formulario. Sin duplicados.
-- Revisión: 0 errores 404, sin estilos en línea, foco visible con Tab en las 3 páginas.
-URL v1.0: https://github.com/mariangeles05/CSS_HTML_trayectoria1.git
+
+Para la versión 1.0 hice estos cambios:
+
+- Etiqueta "Nuevo": la .tarjeta tiene position:relative y la .etiqueta position:absolute con top y right. Así la etiqueta se ubica respecto a su tarjeta y no respecto a toda la página.
+- Botón de WhatsApp: position:fixed abajo a la derecha, para que se quede en su lugar aunque uno baje. Le puse padding-bottom al body para que el botón no tape el pie de página.
+- Ordené styles.css por bloques: variables, base, navegación, componentes y formulario. Quité las reglas que estaban duplicadas.
+- Revisión final: 0 errores 404 en Network, ningún estilo en línea y el foco se ve bien con Tab en las 3 páginas.
+
+Repositorio:  https://github.com/mariangeles05/CSS_HTML_trayectoria1
+GitHub Pages: https://mariangeles05.github.io/CSS_HTML_trayectoria1/
 
 == 14. Cierre de la semana ==
-MR1-4: repositorio, inicio, tarifas con tablas, reservas y menú (v0.1).
-MR5-8: semántica, formulario, validación nativa, accesibilidad y paleta (v0.2).
-MR9-12: estilos con variables, estados, box model, posicionamiento (v1.0).
-Mejoraría: diseño responsive con Flexbox/Grid, fotos reales del negocio y envío real del formulario.
+
+Mirando la semana completa, el proyecto pasó por tres versiones:
+
+MR1 a MR4 (v0.1): creé el repositorio, la página de inicio, las tarifas con tablas, la página de reservas y el menú.
+MR5 a MR8 (v0.2): pasé todo a etiquetas semánticas, armé el formulario con validación nativa, hice la auditoría de accesibilidad y revisé la paleta.
+MR9 a MR12 (v1.0): organicé los estilos con variables, agregué estados al menú, entendí el box model y usé posicionamiento.
+
+Lo que más me sirvió fue usar DevTools para todo: ver las peticiones en Network, los estilos tachados cuando hay un conflicto y los valores reales en Computed. Ya no adivino por qué algo no se ve, sino que voy y lo reviso.
+
+Lo que mejoraría: hacer el diseño responsive con Flexbox o Grid para que se vea bien en celular, poner fotos reales del negocio y que el formulario se envíe de verdad.
+vío real del formulario. (aunque voy a mejorar las fotos de una vez)

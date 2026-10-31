@@ -1,23 +1,38 @@
 BITÁCORA - RUEDA LIBRE
 
 == 1. Petición del documento (Network) ==
+
+Abrí el proyecto con Live Server y en DevTools, pestaña Network, recargué la página para ver qué pedía el navegador. La primera petición que aparece es la del documento, y de ahí saqué estos datos:
+
 URL completa: http://127.0.0.1:5500/index.html
 Protocolo:    http
-Host:         127.0.0.1
-Puerto:       5500
+Host:         127.0.0.1 (es mi propio computador, por eso no es un dominio)
+Puerto:       5500 (el que usa Live Server por defecto)
 Ruta:         /index.html
 Método:       GET
-Código:       200 OK (el servidor encontró y envió la página)
+Código:       200 OK
+
+El 200 quiere decir que el servidor encontró la página y me la envió sin problema. Después escribí a mano una ruta que no existe para ver qué pasaba:
 
 Ruta inexistente: http://127.0.0.1:5500/promociones.html
-Código:       404 Not Found (el recurso no existe en el servidor)
+Código:           404 Not Found
+
+Ahí el servidor responde, pero dice que ese archivo no lo tiene. Me sirvió para entender que el 404 no es que el servidor esté caído, sino que lo que pedí no está.
 
 == 2. Roles de HTML, CSS y JavaScript ==
-HTML: estructura y contenido. Ej: la tabla de tarifas.
-CSS:  presentación visual. Ej: colores de marca y menú horizontal.
-JS:   comportamiento. Ej: validar el formulario de reservas.
+
+Lo pensé con el mismo proyecto de Rueda Libre para no quedarme solo en la definición:
+
+HTML es la estructura y el contenido. Por ejemplo, la tabla de tarifas: qué filas y columnas hay y qué dice cada una.
+CSS es cómo se ve. Por ejemplo, los colores de la marca y que el menú quede horizontal en vez de una lista hacia abajo.
+JavaScript es el comportamiento. Por ejemplo, revisar el formulario de reservas antes de enviarlo y avisar si falta algo.
+
+Si quito el CSS la página sigue teniendo todo el contenido, solo que se ve plana. Si quito el HTML no queda nada. Esa fue la forma más fácil que encontré de diferenciarlos.
 
 == 3. Tabla de rutas relativas ==
+
+Para esta tabla lo que me sirvió fue pensar siempre desde dónde está el archivo en el que escribo el enlace. Si estoy dentro de la carpeta paginas y quiero ir a index.html, tengo que salir una carpeta, y eso es el ../ . Si los dos archivos están en la misma carpeta, basta con el nombre.
+
 Origen                 -> Destino               -> Ruta escrita
 index.html             -> index.html            -> index.html
 index.html             -> paginas/tarifas.html  -> paginas/tarifas.html
@@ -29,3 +44,5 @@ paginas/reservas.html  -> index.html            -> ../index.html
 paginas/reservas.html  -> paginas/tarifas.html  -> tarifas.html
 paginas/reservas.html  -> paginas/reservas.html -> reservas.html
 paginas/tarifas.html   -> img/logo.png          -> ../img/logo.png
+
+El último caso es el del logo. Desde tarifas.html tengo que salir de paginas y luego entrar a img. Si se me olvida el ../ la imagen no carga, y en Network se ve como un 404, así que es fácil detectar el error.

@@ -24,6 +24,11 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+  height: auto; 
+}
+
 body {
   margin: 0;
   padding-bottom: 5rem;
@@ -65,9 +70,7 @@ footer {
 
 header {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   gap: var(--esp-m);
   background-color: var(--blanco);
@@ -92,10 +95,8 @@ header p {
 }
 footer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   gap: var(--esp-l);
   background-color: var(--azul-noche);
   color: var(--blanco);
@@ -114,11 +115,13 @@ footer p {
 
 footer a {
   color: var(--blanco);
+  overflow-wrap: anywhere;
 }
 
 #menu {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--esp-s);
   margin: 0;
   padding: 0;
@@ -127,7 +130,7 @@ footer a {
 
 #menu a {
   display: block;
-  padding: var(--esp-s) var(--esp-m);
+  padding: var(--esp-s) 0.6rem;
   color: var(--gris-asfalto);
   text-decoration: none;
 }
@@ -154,9 +157,9 @@ textarea:focus {
 
 .portada {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
-  gap: var(--esp-xl);
+  gap: var(--esp-l);
   margin: 0 0 var(--esp-l);
 }
 
@@ -250,6 +253,7 @@ table {
   margin-bottom: var(--esp-l);
   border-collapse: collapse;
   background-color: var(--blanco);
+  font-size: 0.8rem;
 }
 
 caption {
@@ -259,7 +263,7 @@ caption {
 
 th,
 td {
-  padding: var(--esp-s) var(--esp-m);
+  padding: 0.35rem 0.4rem;
   text-align: left;
   border: 1px solid var(--gris-asfalto);
 }
@@ -333,11 +337,10 @@ small {
 }
 
 
-/* ===== Nuestra flota (MiniReto 2: Grid + Flexbox) ===== */
 
 .flota-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
   gap: var(--esp-l);
 }
 
@@ -387,11 +390,11 @@ small {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
-/* ===== Layout de escritorio (MiniReto 3) ===== */
+
 
 .rutas-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--esp-l);
 }
 
@@ -416,9 +419,8 @@ small {
 
 .reservas-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  align-items: start;
-  gap: var(--esp-xl);
+  grid-template-columns: 1fr;
+  gap: var(--esp-l);
 }
 
 .reservas-layout section h2,
@@ -428,12 +430,65 @@ small {
 
 .fila-campos {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--esp-m);
+  flex-direction: column;
 }
 
 .fila-campos p {
-  flex: 1;
   margin-top: 0;
+}
+@media (min-width: 768px) {
+  header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--esp-m);
+  }
+
+  #menu a {
+    padding: var(--esp-s) var(--esp-m);
+  }
+
+  footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .portada {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--esp-xl);
+  }
+
+  .rutas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .fila-campos {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--esp-m);
+  }
+
+  .fila-campos p {
+    flex: 1;
+  }
+
+  table {
+    font-size: 1rem;
+  }
+
+  th,
+  td {
+    padding: var(--esp-s) var(--esp-m);
+  }
+}
+
+@media (min-width: 1200px) {
+  .reservas-layout {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+    gap: var(--esp-xl);
+  }
 }

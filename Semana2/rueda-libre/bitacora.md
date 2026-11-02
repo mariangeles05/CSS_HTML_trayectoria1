@@ -75,3 +75,38 @@ Si solo necesito acomodar cosas en una dirección (una fila o una columna) y que
 ### Problemas
 - Al principio envolví documento y celular en la misma fila, pero el correo estaba entre los dos y quedaron tres campos juntos. Moví el correo arriba para que la fila tenga solo los dos campos cortos relacionados.
 - Los títulos del formulario y del contacto no quedaban alineados por arriba porque el `h2` tenía margen superior. Lo quité dentro del layout de reservas.
+
+## MiniReto 4: Mobile-first (v1.5)
+
+### Cómo reorganicé styles.css
+Dejé el archivo por bloques: variables, base, encabezado, pie, componentes, tablas y formulario. Todo lo que está fuera de una media query es la versión del celular, en una sola columna. Después hay dos media queries con `min-width`, que solo agregan lo que cambia:
+- **768 px (tablet):** encabezado y pie en fila, portada en dos columnas, rutas en tres columnas, documento y celular en la misma fila, tablas con letra normal.
+- **1200 px (escritorio):** reservas en proporción 2:1.
+
+No puse media query para la flota porque con `auto-fit` ya se acomoda sola.
+
+### Encabezado y pie
+- **Celular:** el nombre va arriba y el menú debajo, centrado (`flex-direction: column` y `justify-content: center` en el menú). En el pie los tres bloques quedan uno debajo del otro.
+- **Desde 768 px:** vuelve la distribución del MiniReto 1, con el nombre a la izquierda y el menú a la derecha (`flex-direction: row` y `space-between`). El pie queda con los tres bloques en fila.
+
+### Columnas por ancho (modo dispositivo)
+| Ancho | Flota | Rutas | Portada | Reservas |
+|---|---|---|---|---|
+| 360 px | 1 | 1 | 1 (texto arriba, foto abajo) | 1 (contacto debajo del formulario) |
+| 768 px | 2 | 3 | 2 | 1 |
+| 1280 px | 3 | 3 | 2 | 2:1 |
+
+A 360 px no hay scroll horizontal en ninguna de las tres páginas.
+
+### Imágenes fluidas
+Agregué `img { max-width: 100%; height: auto; }` en la base, así ninguna imagen puede ser más ancha que su contenedor.
+
+### Problemas que encontré y cómo los resolví
+1. **El menú se partía en dos líneas a 360 px.** "Reservas" bajaba solo a otra fila porque cada enlace tenía 1rem de padding a los lados. En móvil lo bajé a 0.6rem y desde 768 px vuelve a 1rem. Ahora los tres enlaces caben en una sola línea.
+2. **La tabla de recorridos obligaba a desplazarse de lado.** Tiene cinco columnas y con la letra normal no cabía en 360 px. En móvil le puse `font-size: 0.8rem` y menos relleno en `th` y `td`. Ahora se lee completa sin scroll. Desde 768 px vuelve al tamaño normal.
+3. **La flota se podía salir en pantallas muy pequeñas.** Con `minmax(18rem, 1fr)` cada tarjeta mide mínimo 288 px, y en un celular de 320 px eso es más ancho que el contenido. Lo cambié por `minmax(min(18rem, 100%), 1fr)`, así la tarjeta nunca es más ancha que su contenedor.
+4. **El 2:1 de reservas quedaba muy estrecho en tablet.** A 768 px el formulario quedaba en menos de 500 px y los campos se veían apretados. Por eso el 2:1 empieza en 1200 px, y en tablet el contacto va debajo del formulario.
+5. **El correo del pie se podía desbordar.** En pantallas angostas la dirección de correo es una palabra larga sin espacios. Le puse `overflow-wrap: anywhere` para que pueda partirse.
+
+### Publicación
+URL v1.5: https://mariangeles05.github.io/CSS_HTML_trayectoria1/

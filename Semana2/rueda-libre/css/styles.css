@@ -1,4 +1,5 @@
 
+
 :root {
   --verde-ruta: #1E7A4F;
   --naranja-pedal: #F39A2B;
@@ -322,4 +323,60 @@ textarea:focus {
 small {
   display: block;
   margin-top: var(--esp-s);
+}
+
+
+/* ===== Nuestra flota (MiniReto 2: Grid + Flexbox) ===== */
+
+.flota-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--esp-l);
+}
+
+.modelo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--esp-m);
+  margin-bottom: 0;
+}
+
+.modelo .modelo-info p {
+  margin: 0 0 var(--esp-s);
+}
+
+.modelo img {
+  height: 10rem;
+  margin-bottom: var(--esp-m);
+}
+
+.modelo h3 {
+  margin: 0 0 var(--esp-s);
+}
+
+.precio {
+  font-family: var(--fuente-titulos);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.precio span {
+  font-family: var(--fuente-texto);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--gris-asfalto);
+}
+
+.modelo .btn {
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }

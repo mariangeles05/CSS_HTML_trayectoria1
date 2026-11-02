@@ -153,9 +153,16 @@ textarea:focus {
 
 
 .portada {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--esp-xl);
   margin: 0 0 var(--esp-l);
 }
 
+.portada-foto {
+  margin: 0;
+}
 .portada img {
   display: block;
   width: 100%;
@@ -379,4 +386,54 @@ small {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+/* ===== Layout de escritorio (MiniReto 3) ===== */
+
+.rutas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--esp-l);
+}
+
+.ruta {
+  margin-bottom: 0;
+}
+
+.ruta img {
+  height: 10rem;
+  margin-bottom: var(--esp-m);
+}
+
+.ruta h3 {
+  margin: 0 0 var(--esp-s);
+}
+
+.nivel {
+  margin: 0;
+  color: var(--gris-asfalto);
+  font-weight: 600;
+}
+
+.reservas-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+  gap: var(--esp-xl);
+}
+
+.reservas-layout section h2,
+.contacto h2 {
+  margin-top: 0;
+}
+
+.fila-campos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--esp-m);
+}
+
+.fila-campos p {
+  flex: 1;
+  margin-top: 0;
 }

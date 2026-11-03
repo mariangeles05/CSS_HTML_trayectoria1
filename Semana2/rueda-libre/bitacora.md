@@ -110,3 +110,48 @@ Agregué `img { max-width: 100%; height: auto; }` en la base, así ninguna image
 
 ### Publicación
 URL v1.5: https://mariangeles05.github.io/CSS_HTML_trayectoria1/
+
+## MiniReto 5: La flota en Bootstrap (primera comparación)
+
+### Qué hice
+- Creé `pruebas/catalogo-bootstrap.html` con la plantilla inicial de Bootstrap 5.3 de la documentación oficial: el CSS por CDN en el `head` y el bundle de JavaScript antes de cerrar el `body`.
+- Copié los siete modelos de la flota y cambié las rutas de las imágenes a `../img/flota/...`, porque ahora el archivo está dentro de la carpeta `pruebas`.
+- La distribución sale solo de la grilla: `container` > `row g-4` > cada modelo en un `col-12 col-sm-6 col-lg-4 col-xl-3`.
+- En esta página no escribí CSS ni enlacé `styles.css`.
+
+### Columnas observadas (modo dispositivo)
+| Ancho | Breakpoint activo | Columnas |
+|---|---|---|
+| 360 px | ninguno (`col-12`) | 1 |
+| 600 px | `sm` (desde 576 px) | 2 |
+| 800 px | `sm` (`md` no lo usé) | 2 |
+| 1000 px | `lg` (desde 992 px) | 3 |
+| 1280 px | `xl` (desde 1200 px) | 4 |
+
+En Network, `bootstrap.min.css` y `bootstrap.bundle.min.js` cargan con código 200 y no aparece ningún error.
+
+### Comparación
+| | CSS propio (MiniReto 2) | Bootstrap |
+|---|---|---|
+| Tiempo aproximado | 45 min | 20 min |
+| CSS de distribución de la flota | 7 declaraciones en 2 reglas (`.flota-grid`: display, grid-template-columns, gap; `.modelo`: display, flex-direction, justify-content, gap) | 0 líneas de CSS |
+| Clases en el HTML para la distribución | 2 (`flota-grid` y `modelo`) | 6 distintas (`row`, `g-4`, `col-12`, `col-sm-6`, `col-lg-4`, `col-xl-3`); las de columna se repiten en los 7 modelos (28 veces) |
+| Para alinear "Reservar" abajo | `justify-content: space-between` | `h-100`, `d-flex flex-column` y `mt-auto` |
+| Media queries | 0 (`auto-fit` se adapta sola) | 0 escritas por mí; Bootstrap ya las trae en sus clases |
+
+En la versión propia el tiempo se fue en entender `auto-fit` y `minmax()`, probar cuál ancho mínimo dejaba 3 columnas a 1280 px y 2 a 900 px, y lograr que el botón quedara abajo en todas las tarjetas. Con Bootstrap casi todo el tiempo fue copiar el marcado, cambiar las rutas de las imágenes y buscar en la documentación los nombres de las clases.
+
+### Qué me dio Bootstrap sin esfuerzo
+- Los breakpoints ya están hechos: solo escribo `col-sm-6` y desde 576 px ya son dos columnas.
+- Los gutters con una sola clase (`g-4`), iguales entre filas y columnas.
+- La tarjeta (`card`) ya trae borde, esquinas y relleno, y el botón trae estilos de hover y foco.
+
+### Qué control perdí
+- Ahora soy yo quien decide cuántas columnas hay en cada breakpoint; antes salían del espacio disponible. Con `auto-fit`, si cambio el ancho mínimo de la tarjeta, la cuadrícula se reacomoda sola. Aquí tendría que cambiar las clases de los 7 modelos.
+- Los breakpoints son los de Bootstrap (576, 768, 992, 1200 px), no los que necesita mi contenido. Por ejemplo, a 800 px se siguen viendo 2 columnas aunque cabrían 3.
+- El HTML queda más cargado: cada modelo necesita un `div` extra para la columna, y la distribución queda mezclada con el contenido en lugar de estar en el CSS.
+- El estilo no es el de Rueda Libre (fuente y colores de la marca). Para eso tendría que sobrescribir Bootstrap.
+- La página descarga todo Bootstrap aunque solo use la grilla y la tarjeta.
+
+### Conclusión
+Bootstrap fue más rápido de armar, pero la versión propia se adapta mejor al contenido, deja el HTML más limpio y mantiene la identidad de la marca. Para una prueba rápida Bootstrap sirve; para la flota de Rueda Libre me quedaría con la versión en CSS propio.

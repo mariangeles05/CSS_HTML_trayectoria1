@@ -1,71 +1,71 @@
-# Rueda Libre · Semana 1 · Día 2
+# Rueda Libre · Week 1 · Day 2
 
-Hoy el objetivo fue que el sitio estuviera bien construido por dentro: etiquetas semánticas, un formulario de reservas real, validación sin JavaScript, accesibilidad y una paleta de colores que se lea bien (versión v0.2).
+Today’s goal was to ensure the site was well-constructed under the hood: semantic tags, a functional booking form, validation without JavaScript, accessibility, and a color palette with good readability (version v0.2).
 
-## HTML semántico
+## Semantic HTML
 
-Pasé todas las regiones a etiquetas que dicen lo que son. No quedó ningún `div` ni `span` para las regiones.
+I replaced all structural containers with tags that explicitly define their purpose. No `div` or `span` elements remain for structural layout.
 
-- **index.html:** `header` (h1 + nav), `main` con cuatro `section` (la de servicios tiene tres `article`) y `footer`.
-- **tarifas.html:** `header` con logo, nombre y menú; `main` con las tablas y un `aside` "Qué llevar"; `footer`.
-- **reservas.html:** `header`, `main` con el formulario y un `aside` con el horario, y `footer`.
+- **index.html:** `header` (h1 + nav), `main` containing four `section` elements (the one for services includes three `article` elements), and a `footer`.
+- **tarifas.html:** `header` (with logo, site name, and menu), `main` (containing tables), an `aside` ("What to bring"), and a `footer`.
+- **reservas.html:** `header`, `main` (containing the booking form), an `aside` (with operating hours), and a `footer`.
 
-Usé `article` en los servicios porque cada uno se entiende solo, y `aside` en lo que es información de apoyo.
+I used `article` for the services, as each one is self-contained, and `aside` for supplementary information.
 
-## Formulario de reservas
+## Booking Form
 
-Escogí cada control según cómo responde la persona:
+I selected each input control based on the nature of the user's choice:
 
-- **Tipo de bicicleta → radio:** son tres opciones y solo se escoge una. Así se ven todas a la vez.
-- **Plan y recorrido → select:** es una lista cerrada, y en un desplegable ocupa menos espacio.
-- **Políticas → checkbox:** es una sola decisión de sí o no.
+- **Bicycle type → radio buttons:** Three options, only one of which can be selected; this allows all choices to be visible at once.
+- **Plan and route → `select` (dropdown):** A fixed list of options; a dropdown menu saves space.
+- **Policies → checkbox:** A simple yes/no decision.
 
-Agrupé los campos con `fieldset` y `legend` (Tus datos, Tu alquiler, Confirmación), y cada campo tiene su `label for`.
+I grouped the fields using `fieldset` and `legend` (Your Details, Your Rental, Confirmation), and each input is paired with a corresponding `label` (via the `for` attribute).
 
-## Validación nativa
+## Native Validation
 
-| Campo | Dato de prueba | Resultado | Por qué |
+| Field | Test Data | Result | Reason |
 |---|---|---|---|
-| Nombre | "Jo" | Rechaza | `minlength="3"` |
-| Documento | "12ab45" | Rechaza | `pattern="[0-9]{6,10}"` |
-| Documento | "12345" | Rechaza | Tiene menos de 6 dígitos |
-| Correo | "hola@" | Rechaza | `type="email"` |
-| Celular | 3001234567 | Acepta | Cumple el pattern |
-| Celular | 1234567890 | Rechaza | No empieza por 3 (`pattern="3[0-9]{9}"`) |
-| Fecha | 2026-10-31 | Rechaza | Es anterior a `min` |
-| Cantidad | 7 | Rechaza | `max="6"` |
-| Políticas | sin marcar | Rechaza | `required` |
+| Name | "Jo" | Rejected | `minlength="3"` |
+| ID/Document | "12ab45" | Rejected | `pattern="[0-9]{6,10}"` |
+| ID/Document | "12345" | Reject | Less than 6 digits |
+| Email | "hola@" | Reject | `type="email"` |
+| Mobile | 3001234567 | Accept | Meets the pattern |
+| Mobile | 1234567890 | Reject | Does not start with 3 (`pattern="3[0-9]{9}"`) |
+| Date | 2026-10-31 | Reject | Earlier than `min` |
+| Quantity | 7 | Reject | `max="6"` |
+| Policies | Unchecked | Reject | `required` |
 
-También recorrí el formulario solo con el teclado. El orden del Tab es lógico, en los radios me muevo con las flechas, el checkbox se marca con espacio y con Enter se envía.
+I also navigated through the form using only the keyboard. The tab order is logical; I can move through radio buttons using the arrow keys, check the checkbox using the spacebar, and submit the form by pressing Enter.
 
-## Accesibilidad
+## Accessibility
 
-Lo básico ya estaba bien: `lang="es"`, un solo `h1` por página, `alt` en las fotos y navegación con teclado. Encontré seis cosas por mejorar:
+The basics were already in place: `lang="es"`, a single `h1` per page, `alt` text for images, and keyboard navigation. I identified six areas for improvement:
 
-1. "mira cómo llegar" no se entendía solo, así que lo cambié por "cómo llegar a nuestra sede".
-2. El enlace al mapa abría otra pestaña sin avisar. Le agregué "(se abre en otra pestaña)".
-3. El logo repetía el nombre que está al lado. Le dejé `alt=""` porque ahí es decorativo.
-4. "Reservar ahora" estaba repetido. Ahora uno dice "Reservar ahora tu bicicleta" y el otro "Reservar un recorrido guiado".
-5. El formato de los campos solo estaba en el `title`, que no se ve. Lo puse visible con `<small>`.
-6. El menú no indicaba la página actual. Le agregué `aria-current="page"`.
+1. "See how to get there" was unclear on its own, so I changed it to "How to get to our location."
+2. The link to the map opened in a new tab without warning. I added "(opens in a new tab)."
+3. The logo repeated the name displayed next to it. I set it to `alt=""` since it is purely decorative in this context.
+4. "Book now" appeared twice. I updated them to "Book your bike now" and "Book a guided tour," respectively.
+5. Field formatting information was only provided in the `title` attribute, which is not visible. I made it visible using `<small>`.
+6. The menu did not indicate the current page. I added `aria-current="page"`.
 
-## Paleta y contraste
+## Color Palette and Contrast
 
-Para texto normal se necesita mínimo 4.5:1.
+For standard text, a minimum ratio of 4.5:1 is required.
 
-| Combinación | Ratio | ¿Sirve? |
-|---|---|---|
-| Blanco / Verde Ruta | 5.31:1 | Sí |
-| Blanco / Naranja Pedal | 2.22:1 | No |
-| Azul Noche / Naranja | 7.20:1 | Sí |
-| Azul Noche / Crema | 14.83:1 | Sí |
-| Gris Asfalto / Crema | 5.57:1 | Sí |
-| Verde Ruta / Crema | 4.93:1 | Sí |
-| Naranja Pedal / Crema | 2.06:1 | No |
-| Blanco / Azul Noche | 15.97:1 | Sí |
+| Combination | Ratio | Suitable? |
+|---|---|---| | White / Route Green | 5.31:1 | Yes |
+| White / Pedal Orange | 2.22:1 | No |
+| Midnight Blue / Orange | 7.20:1 | Yes |
+| Midnight Blue / Cream | 14.83:1 | Yes |
+| Asphalt Gray / Cream | 5.57:1 | Yes |
+| Route Green / Cream | 4.93:1 | Yes |
+| Pedal Orange / Cream | 2.06:1 | No |
+| White / Midnight Blue | 15.97:1 | Yes |
 
-El naranja es el color más llamativo de la marca, pero con blanco no se lee. Por eso solo lo uso como fondo, con texto Azul Noche encima.
+Orange is the brand's most striking color, but it is not legible when paired with white. For this reason, I only use it as a background, with Midnight Blue text on top.
 
-## Publicación
+## Publication
 
-- Repositorio: https://github.com/mariangeles05/CSS_HTML_trayectoria1
+- Repository: https://github.com/mariangeles05/CSS_HTML_trayectoria1
+- GitHub Pages: https://mariangeles05.github.io/CSS_HTML_trayectoria1/

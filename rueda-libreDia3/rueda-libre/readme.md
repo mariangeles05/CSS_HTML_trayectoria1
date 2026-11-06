@@ -1,57 +1,55 @@
-# Rueda Libre · Semana 1 · Día 3
+# Rueda Libre · Week 1 · Day 3
 
-Último día de la semana. Pasé los estilos a variables, entendí la herencia y la especificidad, comparé los dos box model y usé posicionamiento para el lanzamiento de la v1.0.
+Last day of the week. I converted styles into variables, grasped inheritance and specificity, compared the two box models, and applied positioning for the v1.0 launch.
 
 ## Variables
 
-Definí los colores, las fuentes y los espacios una sola vez en `:root`. Si el cliente cambia un color, lo cambio en un solo lugar.
+I defined colors, fonts, and spacing once within `:root`. If the client decides to change a color, I only need to update it in one place.
 
 ```css
 :root {
-  --verde-ruta: #1E7A4F;
-  --azul-noche: #14213D;
-  --esp-m: 1rem;
+--verde-ruta: #1E7A4F; 
+--azul-noche: #14213D; 
+--esp-m: 1rem;
 }
 ```
 
-## Herencia
+## Inheritance
 
-Seleccioné un `<p>` y miré la pestaña Computed.
+I selected a `<p>` element and checked the "Computed" tab.
 
-- **Se hereda `font-family`:** el párrafo muestra "Open Sans" aunque solo la declaré en el `body`.
-- **No se hereda `background-color`:** el párrafo muestra `rgba(0,0,0,0)`, o sea transparente. Se ve crema porque deja ver el fondo del `body`.
+- **`font-family` is inherited:** the paragraph displays "Open Sans," even though I only declared it on the `body`.
+- **`background-color` is not inherited:** the paragraph shows `rgba(0,0,0,0)`—it’s transparent. It appears cream-colored only because the `body` background shows through.
 
-## Especificidad
+## Specificity
 
-El enlace de la página actual tenía la clase `.activo`, pero el color no cambiaba. En DevTools aparecía tachado.
+The link for the current page had the `.activo` class, but its color wasn't changing; in DevTools, the style appeared crossed out.
 
-- `#menu a` → (1,0,1): un id y un elemento
-- `.activo` → (0,1,0): una clase
+- `#menu a` → (1,0,1): one ID and one element
+- `.activo` → (0,1,0): one class
 
-Gana `#menu a` porque tiene un id. Lo resolví con `#menu a.activo` → (1,1,1), sin `!important`.
+`#menu a` takes precedence because it includes an ID. I resolved this using `#menu a.activo` → (1,1,1)—no `!important` required.
 
-También ajusté el header a fondo blanco, porque el gris del menú sobre Azul Noche solo daba 2.66:1.
+I also updated the header to have a white background, as the previous gray menu color against the "Midnight Blue" (`Azul Noche`) background only yielded a 2.66:1 contrast ratio.
 
-## Box model
+## Box Model
 
-Medí una tarjeta en una ventana de 1280 px: `width: 100%` (el main mide 960 px), padding de 1.5rem y borde de 1 px.
+I measured a card within a 1280px viewport: `width: 100%` (the `main` container is 960px wide), with 1.5rem of padding and a 1px border. - **content-box:** measures 1010px (960 + 48 padding + 2 border) and extends outside the `main` element.
+- **border-box:** measures 960px, because the padding and border are contained within it. The content itself measures 910px.
 
-- **content-box:** mide 1010 px (960 + 48 de padding + 2 de borde) y se sale del main.
-- **border-box:** mide 960 px, porque el padding y el borde quedan por dentro. El contenido queda en 910 px.
+That is why I set `box-sizing: border-box` for the entire site.
 
-Por eso dejé `box-sizing: border-box` para todo el sitio.
+## Positioning (v1.0 release)
 
-## Posicionamiento (lanzamiento v1.0)
+- **"New" label:** the `.tarjeta` (card) has `position: relative`, and the `.etiqueta` (label) has `position: absolute` with `top` and `right` properties, placing it in the corner of its respective card.
+- **WhatsApp button:** uses `position: fixed` at the bottom right, so it remains in place while scrolling. I added `padding-bottom` to the `body` to ensure it doesn't cover the footer.
+- **styles.css** is now organized into logical blocks (variables, base, navigation, components, form) with no duplicate rules.
+- **Final review:** 0 404 errors, no inline styles, and the focus indicator is visible when navigating via the Tab key across all three pages.
 
-- **Etiqueta "Nuevo":** la `.tarjeta` tiene `position: relative` y la `.etiqueta` tiene `position: absolute` con `top` y `right`. Así queda en la esquina de su tarjeta.
-- **Botón de WhatsApp:** `position: fixed` abajo a la derecha, para que se quede en su lugar con el scroll. Le puse `padding-bottom` al `body` para que no tape el pie.
-- **styles.css** quedó ordenado por bloques (variables, base, navegación, componentes, formulario) y sin reglas duplicadas.
-- **Revisión final:** 0 errores 404, sin estilos en línea y el foco se ve con Tab en las tres páginas.
+## Weekly Summary
 
-## Resumen de la semana
+- **v0.1:** repository setup, homepage, pricing tables, booking section, and menu.
+- **v0.2:** semantic HTML, forms, native validation, accessibility, and color palette.
+- **v1.0:** variables, menu states, box model, and positioning.
 
-- **v0.1:** repositorio, inicio, tarifas con tablas, reservas y menú.
-- **v0.2:** semántica, formulario, validación nativa, accesibilidad y paleta.
-- **v1.0:** variables, estados del menú, box model y posicionamiento.
-
-Lo que quedó pendiente para la semana 2 es el diseño responsive con Flexbox y Grid.
+Responsive design using Flexbox and Grid remains to be addressed in week 2.

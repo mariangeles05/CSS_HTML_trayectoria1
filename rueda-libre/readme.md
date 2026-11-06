@@ -1,40 +1,39 @@
-# Rueda Libre · Semana 1 · Día 1
+# Rueda Libre · Week 1 · Day 1
 
-Primer día del proyecto Rueda Libre, un negocio de alquiler de bicicletas en Medellín. Hoy armé la base del sitio: el repositorio, las tres páginas y el menú para moverse entre ellas (versión v0.1).
+Day one of the "Rueda Libre" (Free Wheel) project—a bicycle rental business in Medellín. Today, I set up the foundation for the site: the repository, three pages, and a navigation menu to move between them (version v0.1).
 
-## Qué hice
+## What I did
 
-- Creé el repositorio y la estructura de carpetas: `index.html` en la raíz, `paginas/` con tarifas y reservas, `css/` para los estilos y `img/` para las imágenes.
-- Hice la página de inicio con la presentación del negocio y los servicios.
-- Hice la página de tarifas con dos tablas: alquiler por tipo de bicicleta y recorridos guiados. Usé `caption`, `thead`, `tbody` y `scope` en los encabezados para que se lean bien.
-- Hice la página de reservas con el correo de contacto y el horario.
-- Agregué el mismo menú en las tres páginas.
+- Created the repository and folder structure: `index.html` in the root directory, a `paginas/` folder for rates and reservations, a `css/` folder for styles, and an `img/` folder for images.
+- Built the homepage, featuring an introduction to the business and its services.
+- Created the rates page, which includes two tables: one for bike rentals by type and another for guided tours. I used `caption`, `thead`, `tbody`, and the `scope` attribute in the headers to ensure proper readability.
+- Built the reservations page, including contact email and operating hours.
+- Added a consistent navigation menu across all three pages.
 
-## Lo que revisé en Network
+## Reviewing the Network tab
 
-Abrí el sitio con Live Server y miré la primera petición en DevTools:
+I opened the site using Live Server and examined the initial request in DevTools:
 
 - URL: `http://127.0.0.1:5500/index.html`
-- Protocolo `http`, host `127.0.0.1` (mi computador), puerto `5500` (el de Live Server), ruta `/index.html`
-- Método `GET` y código `200 OK`, es decir, el servidor encontró la página y la envió.
+- Protocol: `http`; host: `127.0.0.1` (my computer); port: `5500` (used by Live Server); path: `/index.html`
+- Method: `GET`; status code: `200 OK`—this means the server successfully located and delivered the page.
 
-Después pedí una página que no existe (`/promociones.html`) y respondió `404 Not Found`. Con eso entendí que el 404 no quiere decir que el servidor esté caído, sino que ese archivo no está.
+I then requested a page that does not exist (`/promociones.html`), which returned a `404 Not Found` response. This clarified that a 404 error does not mean the server is down; rather, it indicates that the requested file is missing.
 
-## HTML, CSS y JavaScript
+## HTML, CSS, and JavaScript
 
-- **HTML** es la estructura y el contenido, como la tabla de tarifas.
-- **CSS** es cómo se ve: los colores de la marca y el menú horizontal.
-- **JavaScript** es el comportamiento, por ejemplo validar el formulario de reservas.
+- **HTML** defines the structure and content, such as the rates table.
+- **CSS** determines the visual appearance, including brand colors and the horizontal navigation menu. - **JavaScript** represents the behavior—for example, validating a booking form.
 
-## Rutas relativas
+## Relative paths
 
-Lo que más me sirvió fue pensar siempre desde el archivo donde escribo el enlace. Si estoy dentro de `paginas/` y quiero volver a inicio, tengo que salir una carpeta con `../`.
+The most helpful approach for me has been to always think from the perspective of the file where I am writing the link. If I am inside `paginas/` and want to return to the home page, I need to move up one folder using `../`.
 
-| Desde | Hacia | Ruta |
+| From | To | Path |
 |---|---|---|
 | index.html | paginas/tarifas.html | `paginas/tarifas.html` |
 | paginas/tarifas.html | index.html | `../index.html` |
 | paginas/tarifas.html | paginas/reservas.html | `reservas.html` |
 | paginas/tarifas.html | img/logo.png | `../img/logo.png` |
 
-Si se me olvida el `../`, la imagen no carga y en Network aparece un 404.
+If I forget the `../`, the image will not load, and a 404 error will appear in the Network tab.

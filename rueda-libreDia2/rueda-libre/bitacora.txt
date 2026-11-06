@@ -1,39 +1,37 @@
 BITÁCORA - RUEDA LIBRE
 
-== 1. Petición del documento (Network) ==
+== 1. Document Request (Network) ==
 
-Abrí el proyecto con Live Server y en DevTools, pestaña Network, recargué la página para ver qué pedía el navegador. La primera petición que aparece es la del documento, y de ahí saqué estos datos:
+I opened the project using Live Server and, in the "Network" tab of the DevTools, reloaded the page to see what the browser was requesting. The first request that appears is for the document itself, from which I gathered the following details:
 
-URL completa: http://127.0.0.1:5500/index.html
-Protocolo:    http
-Host:         127.0.0.1 (es mi propio computador, por eso no es un dominio)
-Puerto:       5500 (el que usa Live Server por defecto)
-Ruta:         /index.html
-Método:       GET
-Código:       200 OK
+Full URL: http://127.0.0.1:5500/index.html
+Protocol:    http
+Host:         127.0.0.1 (this is my own computer, which is why it’s not a domain name)
+Port:         5500 (the default port used by Live Server)
+Path:         /index.html
+Method:       GET
+Status Code:  200 OK
 
-El 200 quiere decir que el servidor encontró la página y me la envió sin problema. Después escribí a mano una ruta que no existe para ver qué pasaba:
+A 200 status code means the server found the page and sent it to me without any issues. I then manually entered a path that doesn't exist to see what would happen:
 
-Ruta inexistente: http://127.0.0.1:5500/promociones.html
-Código:           404 Not Found
+Non-existent path: http://127.0.0.1:5500/promociones.html
+Status Code:       404 Not Found
 
-Ahí el servidor responde, pero dice que ese archivo no lo tiene. Me sirvió para entender que el 404 no es que el servidor esté caído, sino que lo que pedí no está.
+In this case, the server responds, but it indicates that it does not have that file. This helped me understand that a 404 error doesn't mean the server is down; rather, it means that the requested resource does not exist.
 
-== 2. Roles de HTML, CSS y JavaScript ==
+== 2. Roles of HTML, CSS, and JavaScript ==
 
-Lo pensé con el mismo proyecto de Rueda Libre para no quedarme solo en la definición:
+I used the "Rueda Libre" project to illustrate these concepts, moving beyond simple definitions:
 
-HTML es la estructura y el contenido. Por ejemplo, la tabla de tarifas: qué filas y columnas hay y qué dice cada una.
-CSS es cómo se ve. Por ejemplo, los colores de la marca y que el menú quede horizontal en vez de una lista hacia abajo.
-JavaScript es el comportamiento. Por ejemplo, revisar el formulario de reservas antes de enviarlo y avisar si falta algo.
+HTML represents the structure and content—for example, a price table, including its rows, columns, and the information contained within them.
+CSS defines the visual appearance—for instance, the brand's color scheme or ensuring the menu is displayed horizontally rather than as a vertical list.
+JavaScript handles behavior—such as validating a reservation form before it is submitted and alerting the user if any information is missing.
 
-Si quito el CSS la página sigue teniendo todo el contenido, solo que se ve plana. Si quito el HTML no queda nada. Esa fue la forma más fácil que encontré de diferenciarlos.
+If I remove the CSS, the page retains all its content, though it appears plain. If I remove the HTML, nothing remains. This was the simplest way I found to distinguish between them. == 3. Relative Path Table ==
 
-== 3. Tabla de rutas relativas ==
+For this table, what helped me was to always consider the location of the file where I am writing the link. If I am inside the `paginas` (pages) folder and want to go to `index.html`, I need to move up one folder level—that’s what `../` represents. If both files are in the same folder, the filename alone is sufficient.
 
-Para esta tabla lo que me sirvió fue pensar siempre desde dónde está el archivo en el que escribo el enlace. Si estoy dentro de la carpeta paginas y quiero ir a index.html, tengo que salir una carpeta, y eso es el ../ . Si los dos archivos están en la misma carpeta, basta con el nombre.
-
-Origen                 -> Destino               -> Ruta escrita
+Origin                 -> Destination           -> Path Written
 index.html             -> index.html            -> index.html
 index.html             -> paginas/tarifas.html  -> paginas/tarifas.html
 index.html             -> paginas/reservas.html -> paginas/reservas.html
@@ -45,85 +43,41 @@ paginas/reservas.html  -> paginas/tarifas.html  -> tarifas.html
 paginas/reservas.html  -> paginas/reservas.html -> reservas.html
 paginas/tarifas.html   -> img/logo.png          -> ../img/logo.png
 
-El último caso es el del logo. Desde tarifas.html tengo que salir de paginas y luego entrar a img. Si se me olvida el ../ la imagen no carga, y en Network se ve como un 404, así que es fácil detectar el error.
+The last case involves the logo. From `tarifas.html`, I need to move out of the `paginas` folder and then into the `img` folder. If I forget the `../`, the image won’t load, and it will appear as a 404 error in the Network tab—making the mistake easy to spot.
 
-== 4. Esquema de regiones (MiniReto 5) ==
+== 4. Region Layout (Mini-Challenge 5) ==
 
-Antes de tocar el código hice el esquema de cada página para ver qué región iba dentro de cuál. Quedó así:
+Before touching the code, I created a layout sketch for each page to determine which region should be nested within another. Here is the final structure:
 
-index.html:    header (h1 + nav) > main (4 section; la de "Nuestros servicios" tiene 3 article) > footer
-tarifas.html:  header (logo + nombre + nav) > main (h1, section de tarifas, section #recorridos, section de información con un aside "Qué llevar") > footer
-reservas.html: header (logo + nombre + nav) > main (h1, aside con el horario) > footer
+index.html:    header (h1 + nav) > main (4 sections; the "Our Services" section contains 3 `article` elements) > footer
+tarifas.html:  header (logo + name + nav) > main (h1, a section for rates, a section with the ID `#recorridos`, and an information section containing an `aside` for "What to bring") > footer
+reservas.html: header (logo + name + nav) > main (h1, an `aside` for operating hours) > footer
 
-No usé ningún div ni span. Cada parte tiene una etiqueta semántica que dice lo que es: los servicios son article porque cada uno se entiende solo, y "Qué llevar" y el horario son aside porque son información de apoyo, no el contenido principal de la página.
+I did not use any `div` or `span` elements. Each part uses a semantic tag that describes its purpose: the services are marked as `article` elements because each one is self-contained, while the "What to bring" section and the operating hours are marked as `aside` elements because they serve as supplementary information rather than the page's primary content.
 
-== 5. Justificación de controles (MiniReto 6) ==
+== 5. Justification of Form Controls (Mini-Challenge 6) ==
 
-Para el formulario de reservas no escogí los controles al azar, sino según cómo responde la persona:
+For the reservation form, I did not choose the controls at random; rather, I selected them based on the nature of the user's input:
 
-Tipo de bicicleta -> radio. Son 3 opciones y solo se puede escoger una. Con radio se ven todas al mismo tiempo y la persona compara sin abrir nada.
-Plan o recorrido  -> select. Es una lista cerrada con más opciones, y en un desplegable ocupa mucho menos espacio.
-Políticas         -> checkbox. Es una sola decisión de sí o no: acepto o no acepto.
+Bicycle type -> `radio` buttons. There are 3 options, and only one can be selected. Using `radio` buttons allows all options to be visible simultaneously, enabling the user to compare them without needing to open a menu.
+Plan or route -> `select` (dropdown). This is a closed list with multiple options; a dropdown menu is more space-efficient.
+Policies -> `checkbox`. This represents a simple binary decision: accept or decline.
 
-== 6. Pruebas de validación (MiniReto 7) ==
+== 6. Validation Tests (Mini-Challenge 7) ==
 
-Probé cada campo con datos que deberían pasar y con datos que no, para confirmar que la validación nativa de HTML hiciera su trabajo:
+I tested each field using both valid and invalid data to ensure that the native HTML validation functioned as expected:
 
-Campo      | Dato de prueba | Esperado | Obtenido
-Nombre     | "Jo"           | Rechaza  | Rechaza (mínimo 3 caracteres)
-Documento  | "12ab45"       | Rechaza  | Rechaza (pattern, solo números)
-Documento  | "12345"        | Rechaza  | Rechaza (debe tener de 6 a 10 dígitos)
-Correo     | "hola@"        | Rechaza  | Rechaza (type="email")
-Celular    | 3001234567     | Acepta   | Acepta
-Celular    | 1234567890     | Rechaza  | Rechaza (no empieza por 3)
-Celular    | 300123         | Rechaza  | Rechaza (menos de 10 dígitos)
-Fecha      | 2026-10-31     | Rechaza  | Rechaza (es anterior al min)
-Cantidad   | 7              | Rechaza  | Rechaza (el máximo es 6)
-Políticas  | sin marcar     | Rechaza  | Rechaza (required)
+Field      | Test Data | Expected Result | Actual Result
+Name       | "Jo"      | Rejected        | Rejected (minimum 3 characters required)
+Document   | "12ab45"  | Rejected        | Rejected (pattern constraint: numbers only)
+Document   | "12345"   | Rejected        | Rejected (must be 6 to 10 digits long)
+Email      | "hola@"   | Rejected        | Rejects (type="email")
+Mobile     | 3001234567     | Accepts  | Accepts
+Mobile     | 1234567890     | Rejects  | Rejects (does not start with 3)
+Mobile     | 300123         | Rejects  | Rejects (fewer than 10 digits)
+Date       | 2026-10-31     | Rejects  | Rejects (earlier than the minimum)
+Quantity   | 7              | Rejects  | Rejects (the maximum is 6)
+Policies   | unchecked      | Rejects  | Rejects (required)
 
-Todos los resultados coincidieron con lo esperado. El del celular 1234567890 me pareció importante porque tiene los 10 dígitos, pero igual lo rechaza porque en Colombia los celulares empiezan por 3.
-
-También recorrí el formulario solo con el teclado. El orden del Tab es lógico: primero los datos personales, después lo del alquiler, después la confirmación y al final el botón. En los radios me muevo con las flechas, el checkbox se marca con la barra espaciadora y con Enter se envía.
-
-== 7. Auditoría de accesibilidad (MiniReto 8) ==
-
-Primero revisé lo básico y estaba bien: lang="es" en las 3 páginas, un solo h1 por página sin saltar niveles de títulos, alt en las fotos y se puede recorrer todo con el teclado.
-
-Después busqué cosas que se pudieran mejorar. Encontré seis:
-
-1. El enlace "mira cómo llegar" no se entiende si se lee solo (un lector de pantalla puede listar los enlaces sin el texto de alrededor). Lo cambié por "cómo llegar a nuestra sede".
-2. El enlace al mapa abría otra pestaña sin avisar. Le agregué "(se abre en otra pestaña)".
-3. El logo del header tenía un alt que repetía el nombre del negocio, que ya está escrito al lado. Le dejé alt="" porque ahí es decorativo y si no el lector lo dice dos veces.
-4. "Reservar ahora" estaba repetido sin contexto. Ahora uno dice "Reservar ahora tu bicicleta" y el otro "Reservar un recorrido guiado".
-5. El formato del documento, del celular y el rango de fechas solo estaba en el title, que no se ve a menos que pases el mouse. Lo puse como texto de ayuda visible con <small>.
-6. El menú no indicaba en qué página estás. Le agregué aria-current="page" al enlace de la página actual.
-
-== 8. Contraste de la paleta (WCAG) ==
-
-Revisé cada combinación de colores de la marca con un verificador de contraste. Para texto normal se necesita mínimo 4.5:1.
-
-Combinación             | Ratio   | Clasificación
-Blanco / Verde Ruta     | 5.31:1  | Apta texto normal
-Blanco / Naranja Pedal  | 2.22:1  | No apta
-Azul Noche / Naranja    | 7.20:1  | Apta texto normal
-Azul Noche / Crema      | 14.83:1 | Apta texto normal
-Gris Asfalto / Crema    | 5.57:1  | Apta texto normal
-Verde Ruta / Crema      | 4.93:1  | Apta texto normal
-Naranja Pedal / Crema   | 2.06:1  | No apta
-Blanco / Azul Noche     | 15.97:1 | Apta texto normal
-
-Lo que más me sorprendió fue el naranja: es el color más llamativo de la marca, pero con blanco o sobre crema no se lee bien. Por eso lo uso solo como fondo, con texto Azul Noche encima.
-
-Con eso armé el mapa de uso de color:
-- Fondo general: Crema. Textos y títulos: Azul Noche. Texto secundario: Gris Asfalto.
-- Enlaces: Verde Ruta. Botón principal: fondo Verde Ruta con texto blanco.
-- Botón secundario y destacados: fondo Naranja Pedal con texto Azul Noche (nunca blanco).
-- Header y footer: fondo Azul Noche con texto blanco.
-- El naranja nunca va como color de texto sobre crema.
-
-== 9. Publicación ==
-
-Subí el proyecto a GitHub
-
-Repositorio:  https://github.com/mariangeles05/CSS_HTML_trayectoria1
+T
 

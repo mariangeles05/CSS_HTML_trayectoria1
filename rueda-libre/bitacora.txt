@@ -1,39 +1,39 @@
-BITÁCORA - RUEDA LIBRE
+BITACORA - RUEDA LIBRE
 
-== 1. Petición del documento (Network) ==
+== 1. Document Request (Network) ==
 
-Abrí el proyecto con Live Server y en DevTools, pestaña Network, recargué la página para ver qué pedía el navegador. La primera petición que aparece es la del documento, y de ahí saqué estos datos:
+I opened the project using Live Server and, in the DevTools "Network" tab, reloaded the page to see what the browser was requesting. The first request that appears is for the document itself, from which I gathered the following details:
 
-URL completa: http://127.0.0.1:5500/index.html
-Protocolo:    http
-Host:         127.0.0.1 (es mi propio computador, por eso no es un dominio)
-Puerto:       5500 (el que usa Live Server por defecto)
-Ruta:         /index.html
-Método:       GET
-Código:       200 OK
+Full URL: http://127.0.0.1:5500/index.html
+Protocol:    http
+Host:         127.0.0.1 (this is my own computer, which is why it’s not a domain name)
+Port:         5500 (the default port used by Live Server)
+Path:         /index.html
+Method:       GET
+Status Code:  200 OK
 
-El 200 quiere decir que el servidor encontró la página y me la envió sin problema. Después escribí a mano una ruta que no existe para ver qué pasaba:
+A 200 status code means the server found the page and delivered it without any issues. I then manually entered a path that doesn't exist to see what would happen:
 
-Ruta inexistente: http://127.0.0.1:5500/promociones.html
-Código:           404 Not Found
+Non-existent path: http://127.0.0.1:5500/promociones.html
+Status Code:       404 Not Found
 
-Ahí el servidor responde, pero dice que ese archivo no lo tiene. Me sirvió para entender que el 404 no es que el servidor esté caído, sino que lo que pedí no está.
+In this case, the server responds, but it indicates that it does not have that file. This helped me understand that a 404 error doesn't mean the server is down; rather, it means the requested resource does not exist.
 
-== 2. Roles de HTML, CSS y JavaScript ==
+== 2. Roles of HTML, CSS, and JavaScript ==
 
-Lo pensé con el mismo proyecto de Rueda Libre para no quedarme solo en la definición:
+I used the same "Rueda Libre" project to illustrate these concepts, moving beyond simple definitions:
 
-HTML es la estructura y el contenido. Por ejemplo, la tabla de tarifas: qué filas y columnas hay y qué dice cada una.
-CSS es cómo se ve. Por ejemplo, los colores de la marca y que el menú quede horizontal en vez de una lista hacia abajo.
-JavaScript es el comportamiento. Por ejemplo, revisar el formulario de reservas antes de enviarlo y avisar si falta algo.
+HTML represents the structure and content—for instance, the pricing table: which rows and columns exist and what information each one contains.
+CSS defines the visual appearance—for example, the brand's color scheme or ensuring the menu is displayed horizontally rather than as a vertical list.
+JavaScript handles behavior—for example, validating a reservation form before it is submitted and alerting the user if any information is missing.
 
-Si quito el CSS la página sigue teniendo todo el contenido, solo que se ve plana. Si quito el HTML no queda nada. Esa fue la forma más fácil que encontré de diferenciarlos.
+If I remove the CSS, the page retains all its content, though it appears plain. If I remove the HTML, nothing remains. That was the easiest way I found to distinguish between them.
 
-== 3. Tabla de rutas relativas ==
+== 3. Relative Path Table ==
 
-Para esta tabla lo que me sirvió fue pensar siempre desde dónde está el archivo en el que escribo el enlace. Si estoy dentro de la carpeta paginas y quiero ir a index.html, tengo que salir una carpeta, y eso es el ../ . Si los dos archivos están en la misma carpeta, basta con el nombre.
+For this table, what helped me was to always consider the location of the file where I’m writing the link. If I’m inside the `paginas` (pages) folder and want to link to `index.html`, I need to move up one folder—that’s what `../` represents. If both files are in the same folder, the filename alone is sufficient.
 
-Origen                 -> Destino               -> Ruta escrita
+Origin                 -> Destination            -> Path Written
 index.html             -> index.html            -> index.html
 index.html             -> paginas/tarifas.html  -> paginas/tarifas.html
 index.html             -> paginas/reservas.html -> paginas/reservas.html
@@ -45,4 +45,4 @@ paginas/reservas.html  -> paginas/tarifas.html  -> tarifas.html
 paginas/reservas.html  -> paginas/reservas.html -> reservas.html
 paginas/tarifas.html   -> img/logo.png          -> ../img/logo.png
 
-El último caso es el del logo. Desde tarifas.html tengo que salir de paginas y luego entrar a img. Si se me olvida el ../ la imagen no carga, y en Network se ve como un 404, así que es fácil detectar el error.
+The last case involves the logo. From `tarifas.html`, I need to move out of the `paginas` folder and then into the `img` folder. If I forget the `../`, the image won’t load, and it will appear as a 404 error in the Network tab—making it easy to spot the mistake.

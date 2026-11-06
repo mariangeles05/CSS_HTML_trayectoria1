@@ -1,157 +1,162 @@
 # Bitácora Rueda Libre v1.5
 
-## MiniReto 1: Flexbox
+## MiniChallenge 1: Flexbox
 
-### Qué hice
-- Agrupé logo y nombre en `.marca` para que el `header` tuviera solo dos hijos: la marca y el menú.
-- Encabezado: `display: flex` con `justify-content: space-between` (nombre y menú en extremos opuestos) y `align-items: center` (centrados verticalmente).
-- Menú: `#menu` flexible con `gap` y `flex-wrap: wrap`. Eliminé los márgenes de los `li` y el `inline-block` de la semana 1.
-- Pie: tres bloques (marca, contacto y horario) en fila, alineados por arriba con `align-items: flex-start` y separados con `gap`.
-- Usé el mismo HTML de encabezado y pie en las tres páginas; los estilos están en `css/styles.css`.
+### What I Did
+- I grouped the logo and name inside `.marca` so that the `header` had only two children: the brand and the menu.
+- Header: `display: flex` with `justify-content: space-between` (name and menu on opposite sides) and `align-items: center` (vertically centered).
+- Menu: flexible `#menu` with `gap` and `flex-wrap: wrap`. I removed the margins from the `li` elements and the `inline-block` from week 1.
+- Footer: three blocks (brand, contact, and schedule) in a row, aligned at the top with `align-items: flex-start` and separated with `gap`.
+- I used the same header and footer HTML on all three pages; the styles are in `css/styles.css`.
 
-### Al estrechar la ventana
-- **Encabezado:** a unos ___ px el menú baja debajo del nombre en lugar de desbordarse. A unos ___ px los enlaces se parten en dos líneas.
-- **Pie:** a unos ___ px el bloque del horario baja a otra línea. A unos ___ px los tres bloques quedan apilados.
+### When Narrowing the Window
+- **Header:** At around ___ px, the menu moves below the name instead of overflowing. At around ___ px, the links break into two lines.
+- **Footer:** At around ___ px, the schedule block moves to another line. At around ___ px, the three blocks are stacked vertically.
 
-### Por qué gap en vez de márgenes e inline-block
-`gap` separa solo entre elementos y se define una vez en el contenedor, sin corregir extremos. Con Flexbox el `inline-block` ya no hace falta.
+### Why Use gap Instead of Margins and inline-block
+`gap` only adds space between elements and is defined once in the container, without needing to adjust the edges. With Flexbox, `inline-block` is no longer necessary.
 
-### Problemas
-- El `header` tenía tres hijos y `space-between` dejaba el nombre en el centro. Lo resolví agrupando logo y nombre en `.marca`.
-- Los títulos del pie no se veían (azul sobre azul). Lo resolví con `footer h2` en blanco.
+### Problems
+- The `header` had three children, and `space-between` placed the name in the center. I solved this by grouping the logo and name inside `.marca`.
+- The footer headings were not visible (blue text on a blue background). I fixed this with `footer h2` in white.
 
-## MiniReto 2: Grid para la flota
+## MiniChallenge 2: Grid for the Fleet
 
-### Qué hice
-- En `index.html` creé la sección `#flota` con el título "Nuestra flota" y un `div.flota-grid` con un `article` por modelo. Cada uno tiene imagen, nombre (`h3`), descripción, precio por hora y el enlace "Reservar".
-- La cuadrícula es `display: grid` con `grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))`. Así el navegador mete tantas columnas como quepan con mínimo 18rem cada una, y el espacio que sobra se reparte con `1fr`. No usé ninguna media query.
-- La separación entre filas y columnas es la misma: `gap: var(--esp-l)`.
-- Cada tarjeta es un Flexbox en columna (`flex-direction: column`). Adentro tiene dos hijos: `.modelo-info` (imagen, nombre, descripción y precio) y el enlace. Con `justify-content: space-between` el enlace queda siempre abajo, aunque la descripción sea más corta, como pasa con la Infantil.
-- Las tarjetas usan la clase `.tarjeta` de la semana 1, así que conservan el padding, el borde de 1 px y las esquinas redondeadas. Solo les quité el `margin-bottom`, porque ahora la separación la hace el `gap`.
+### What I Did
+- In `index.html`, I created the `#flota` section with the title "Our Fleet" and a `div.flota-grid` containing one `article` for each model. Each one has an image, name (`h3`), description, hourly price, and the "Book Now" link.
+- The grid uses `display: grid` with `grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))`. This allows the browser to fit as many columns as possible, with a minimum width of 18rem each, and the remaining space is distributed using `1fr`. I did not use any media queries.
+- The spacing between rows and columns is the same: `gap: var(--esp-l)`.
+- Each card is a Flexbox column (`flex-direction: column`). Inside, it has two children: `.modelo-info` (image, name, description, and price) and the link. With `justify-content: space-between`, the link always stays at the bottom, even when the description is shorter, as happens with the Children's model.
+- The cards use the `.tarjeta` class from week 1, so they keep their padding, 1 px border, and rounded corners. I only removed `margin-bottom` because the spacing is now handled by `gap`.
 
-### Por qué 18rem
-Probé con valores más pequeños y a 900 px me seguían saliendo 3 columnas muy apretadas, porque el `main` tiene un máximo de 60rem. Con 18rem (288 px) a 900 px ya caben solo 2, y las tarjetas no se ven estrechas.
+### Why 18rem
+I tested smaller values, but at 900 px I still got three very narrow columns because `main` has a maximum width of 60rem. With 18rem (288 px), only two columns fit at 900 px, and the cards do not look narrow.
 
-### Séptimo modelo
-Agregué el Tándem ($20.000) como un `article` más, sin tocar el CSS. La cuadrícula lo acomodó sola: a 1280 px quedó en una tercera fila, en la primera columna.
+### Seventh Model
+I added the Tandem ($20,000) as another `article`, without changing the CSS. The grid arranged it automatically: at 1280 px, it appeared in a third row, in the first column.
 
-### Columnas observadas (modo dispositivo de DevTools)
-| Ancho | Columnas | Filas con 7 modelos |
+### Observed Columns (DevTools Device Mode)
+
+| Width | Columns | Rows with 7 Models |
 |---|---|---|
 | 1280 px | 3 | 3 |
 | 900 px | 2 | 4 |
 | 500 px | 1 | 7 |
 
-En los tres anchos las tarjetas de una misma fila tienen la misma altura y los botones "Reservar" quedan alineados abajo. Tampoco aparece scroll horizontal.
+At all three widths, cards in the same row have the same height, and the "Book Now" buttons stay aligned at the bottom. There is also no horizontal scrolling.
 
-### Por qué la altura es igual
-Grid estira por defecto los elementos de una fila a la altura del más alto (`align-items: stretch`). Como la tarjeta también es Flexbox en columna, ese espacio extra queda entre la información y el botón, y el botón se va al final.
+### Why the Height Is the Same
+Grid stretches the elements in a row by default to match the height of the tallest element (`align-items: stretch`). Since the card is also a Flexbox column, the extra space stays between the information and the button, moving the button to the bottom.
 
-### Problemas
-- La regla `.tarjeta img` de la semana 1 ponía las imágenes de 16rem de alto, y en la cuadrícula las tarjetas quedaban muy largas. Agregué `.modelo img` con 10rem; como tiene la misma especificidad y va después en el CSS, gana sin `!important`.
-- Todos los enlaces decían solo "Reservar" y con lector de pantalla no se sabía cuál era cuál. Les agregué el nombre del modelo en un `span.visually-hidden`, que no se ve pero sí se lee.
-- En `tarifas.html` el menú marcaba "Reservas" como página actual. Lo corregí para que `activo` y `aria-current` queden en "Tarifas y rutas".
+### Problems
+- The `.tarjeta img` rule from week 1 set the images to 16rem high, making the cards too long in the grid. I added `.modelo img` with 10rem; since it has the same specificity and appears later in the CSS, it takes priority without using `!important`.
+- All the links only said "Book Now", so screen reader users could not tell which model each link referred to. I added the model name inside a `span.visually-hidden`, which is invisible but can still be read.
+- In `tarifas.html`, the menu marked "Reservations" as the current page. I fixed it so that `activo` and `aria-current` are set to "Rates and Routes".
 
-## MiniReto 3: Layout de escritorio con Grid y Flexbox
+## MiniChallenge 3: Desktop Layout with Grid and Flexbox
 
-### Criterio que usé
-Si solo necesito acomodar cosas en una dirección (una fila o una columna) y que cada una ocupe según su contenido, uso **Flexbox**. Si quiero definir desde el contenedor cuánto mide cada columna, o que los elementos queden alineados en filas y columnas a la vez, uso **Grid**.
+### Criteria I Used
+If I only need to arrange elements in one direction (a row or a column), and each element should take up space according to its content, I use **Flexbox**. If I want to define the width of each column from the container, or align elements in rows and columns at the same time, I use **Grid**.
 
-### Decisiones
-| Caso | Qué usé | Por qué |
+### Decisions
+
+| Case | What I Used | Why |
 |---|---|---|
-| Portada | Grid (`1fr 1fr`) | Es la estructura de la página: quiero que el texto y la foto tengan exactamente la mitad cada uno sin importar cuánto texto haya. Con `align-items: center` el texto queda centrado verticalmente frente a la foto. |
-| Galería de rutas | Grid (`repeat(3, 1fr)`) | Es una cuadrícula: las tres tarjetas miden lo mismo y, si mañana agregan más rutas, bajan a otra fila alineadas con las de arriba. Eso es trabajar en dos dimensiones. |
-| Reservas | Grid (`2fr 1fr`) | El boceto pide una proporción exacta: el formulario ocupa dos partes y el contacto una. Con `fr` lo defino en el contenedor y no tengo que calcular porcentajes. Usé `align-items: start` para que el contacto no se estire hasta el largo del formulario. |
-| Fila del formulario | Flexbox | Son solo dos campos uno al lado del otro, en una sola dirección. Con `flex: 1` cada uno toma la mitad, y con `gap` quedan separados. No necesitaba filas y columnas. |
-| Encabezado | Flexbox | Es una sola fila: marca a un lado y menú al otro con `justify-content: space-between`. Cada parte mide lo que mide su contenido, y con `flex-wrap` el menú baja si no cabe. |
-| Pie | Flexbox | Son tres bloques en una fila con tamaños distintos según el texto. Con `flex-wrap` se apilan cuando no caben, sin que yo defina columnas. |
+| Homepage | Grid (`1fr 1fr`) | It is the page structure: I want the text and the photo to take up exactly half each, regardless of how much text there is. With `align-items: center`, the text is vertically centered next to the photo. |
+| Routes Gallery | Grid (`repeat(3, 1fr)`) | It is a grid: all three cards have the same size, and if more routes are added tomorrow, they move to another row aligned with the ones above. This means working in two dimensions. |
+| Reservations | Grid (`2fr 1fr`) | The design requires an exact proportion: the form takes up two parts and the contact section takes up one. With `fr`, I define this in the container without calculating percentages. I used `align-items: start` so the contact section does not stretch to the full height of the form. |
+| Form Row | Flexbox | There are only two fields next to each other, in one direction. With `flex: 1`, each one takes up half the space, and with `gap`, they stay separated. I did not need rows and columns. |
+| Header | Flexbox | It is a single row: the brand on one side and the menu on the other using `justify-content: space-between`. Each part takes up the space required by its content, and with `flex-wrap`, the menu moves down if there is not enough space. |
+| Footer | Flexbox | There are three blocks in one row, with different sizes depending on the text. With `flex-wrap`, they stack when there is not enough space, without needing to define columns. |
 
-### Comprobaciones
-- A 1280 px: la portada queda en dos columnas iguales, las rutas en una fila de tres y reservas en proporción 2:1.
-- Todas las columnas están definidas con `fr`, sin porcentajes ni `px`.
-- El menú, la flota (sigue en 3 columnas a 1280 px) y la validación del formulario siguen funcionando. Probé otra vez el celular 1234567890 y lo sigue rechazando.
+### Checks
+- At 1280 px: the homepage has two equal columns, the routes are in one row with three columns, and reservations have a 2:1 proportion.
+- All columns are defined with `fr`, without percentages or `px`.
+- The menu, the fleet (which still has 3 columns at 1280 px), and the form validation continue working. I tested the phone number 1234567890 again, and it is still rejected.
 
-### Problemas
-- Al principio envolví documento y celular en la misma fila, pero el correo estaba entre los dos y quedaron tres campos juntos. Moví el correo arriba para que la fila tenga solo los dos campos cortos relacionados.
-- Los títulos del formulario y del contacto no quedaban alineados por arriba porque el `h2` tenía margen superior. Lo quité dentro del layout de reservas.
+### Problems
+- At first, I placed the document and phone fields in the same row, but the email field was between them, so three fields ended up together. I moved the email field above so the row only contains the two related short fields.
+- The form and contact headings were not aligned at the top because the `h2` had a top margin. I removed it inside the reservations layout.
 
-## MiniReto 4: Mobile-first (v1.5)
+## MiniChallenge 4: Mobile-First (v1.5)
 
-### Cómo reorganicé styles.css
-Dejé el archivo por bloques: variables, base, encabezado, pie, componentes, tablas y formulario. Todo lo que está fuera de una media query es la versión del celular, en una sola columna. Después hay dos media queries con `min-width`, que solo agregan lo que cambia:
-- **768 px (tablet):** encabezado y pie en fila, portada en dos columnas, rutas en tres columnas, documento y celular en la misma fila, tablas con letra normal.
-- **1200 px (escritorio):** reservas en proporción 2:1.
+### How I Reorganized styles.css
+I organized the file into sections: variables, base, header, footer, components, tables, and form. Everything outside a media query is the mobile version, in a single column. Then there are two media queries with `min-width` that only add the necessary changes:
+- **768 px (tablet):** header and footer in a row, homepage in two columns, routes in three columns, document and phone fields in the same row, and tables with normal font size.
+- **1200 px (desktop):** reservations with a 2:1 proportion.
 
-No puse media query para la flota porque con `auto-fit` ya se acomoda sola.
+I did not add a media query for the fleet because `auto-fit` already adjusts it automatically.
 
-### Encabezado y pie
-- **Celular:** el nombre va arriba y el menú debajo, centrado (`flex-direction: column` y `justify-content: center` en el menú). En el pie los tres bloques quedan uno debajo del otro.
-- **Desde 768 px:** vuelve la distribución del MiniReto 1, con el nombre a la izquierda y el menú a la derecha (`flex-direction: row` y `space-between`). El pie queda con los tres bloques en fila.
+### Header and Footer
+- **Mobile:** the name goes at the top and the menu below it, centered (`flex-direction: column` and `justify-content: center` in the menu). In the footer, the three blocks are stacked vertically.
+- **From 768 px:** the layout from MiniChallenge 1 returns, with the name on the left and the menu on the right (`flex-direction: row` and `space-between`). The footer has the three blocks in a row.
 
-### Columnas por ancho (modo dispositivo)
-| Ancho | Flota | Rutas | Portada | Reservas |
+### Columns by Width (Device Mode)
+
+| Width | Fleet | Routes | Homepage | Reservations |
 |---|---|---|---|---|
-| 360 px | 1 | 1 | 1 (texto arriba, foto abajo) | 1 (contacto debajo del formulario) |
+| 360 px | 1 | 1 | 1 (text above, photo below) | 1 (contact below the form) |
 | 768 px | 2 | 3 | 2 | 1 |
 | 1280 px | 3 | 3 | 2 | 2:1 |
 
-A 360 px no hay scroll horizontal en ninguna de las tres páginas.
+At 360 px, there is no horizontal scrolling on any of the three pages.
 
-### Imágenes fluidas
-Agregué `img { max-width: 100%; height: auto; }` en la base, así ninguna imagen puede ser más ancha que su contenedor.
+### Responsive Images
+I added `img { max-width: 100%; height: auto; }` to the base styles, so no image can be wider than its container.
 
-### Problemas que encontré y cómo los resolví
-1. **El menú se partía en dos líneas a 360 px.** "Reservas" bajaba solo a otra fila porque cada enlace tenía 1rem de padding a los lados. En móvil lo bajé a 0.6rem y desde 768 px vuelve a 1rem. Ahora los tres enlaces caben en una sola línea.
-2. **La tabla de recorridos obligaba a desplazarse de lado.** Tiene cinco columnas y con la letra normal no cabía en 360 px. En móvil le puse `font-size: 0.8rem` y menos relleno en `th` y `td`. Ahora se lee completa sin scroll. Desde 768 px vuelve al tamaño normal.
-3. **La flota se podía salir en pantallas muy pequeñas.** Con `minmax(18rem, 1fr)` cada tarjeta mide mínimo 288 px, y en un celular de 320 px eso es más ancho que el contenido. Lo cambié por `minmax(min(18rem, 100%), 1fr)`, así la tarjeta nunca es más ancha que su contenedor.
-4. **El 2:1 de reservas quedaba muy estrecho en tablet.** A 768 px el formulario quedaba en menos de 500 px y los campos se veían apretados. Por eso el 2:1 empieza en 1200 px, y en tablet el contacto va debajo del formulario.
-5. **El correo del pie se podía desbordar.** En pantallas angostas la dirección de correo es una palabra larga sin espacios. Le puse `overflow-wrap: anywhere` para que pueda partirse.
+### Problems I Found and How I Solved Them
+1. **The menu broke into two lines at 360 px.** "Reservations" moved to another row by itself because each link had 1rem of padding on the sides. On mobile, I reduced it to 0.6rem, and from 768 px it returns to 1rem. Now all three links fit on a single line.
+2. **The routes table required horizontal scrolling.** It has five columns, and with the normal font size, it did not fit at 360 px. On mobile, I set `font-size: 0.8rem` and reduced the padding in `th` and `td`. Now the entire table is readable without scrolling. From 768 px, it returns to the normal size.
+3. **The fleet could overflow on very small screens.** With `minmax(18rem, 1fr)`, each card has a minimum width of 288 px, which is wider than the content on a 320 px phone. I changed it to `minmax(min(18rem, 100%), 1fr)`, so the card is never wider than its container.
+4. **The 2:1 reservations layout was too narrow on tablets.** At 768 px, the form was less than 500 px wide, and the fields looked cramped. That is why the 2:1 layout starts at 1200 px, while on tablets the contact section goes below the form.
+5. **The footer email could overflow.** On narrow screens, the email address is a long word without spaces. I added `overflow-wrap: anywhere` so it can break into multiple lines.
 
-### Publicación
+### Publication
 URL v1.5: https://mariangeles05.github.io/CSS_HTML_trayectoria1/
 
-## MiniReto 5: La flota en Bootstrap (primera comparación)
+## MiniChallenge 5: The Fleet in Bootstrap (First Comparison)
 
-### Qué hice
-- Creé `pruebas/catalogo-bootstrap.html` con la plantilla inicial de Bootstrap 5.3 de la documentación oficial: el CSS por CDN en el `head` y el bundle de JavaScript antes de cerrar el `body`.
-- Copié los siete modelos de la flota y cambié las rutas de las imágenes a `../img/flota/...`, porque ahora el archivo está dentro de la carpeta `pruebas`.
-- La distribución sale solo de la grilla: `container` > `row g-4` > cada modelo en un `col-12 col-sm-6 col-lg-4 col-xl-3`.
-- En esta página no escribí CSS ni enlacé `styles.css`.
+### What I Did
+- I created `pruebas/catalogo-bootstrap.html` using the initial Bootstrap 5.3 template from the official documentation: the CSS through CDN in the `head` and the JavaScript bundle before closing the `body`.
+- I copied the seven fleet models and changed the image paths to `../img/flota/...` because the file is now inside the `pruebas` folder.
+- The layout comes entirely from the grid: `container` > `row g-4` > each model inside a `col-12 col-sm-6 col-lg-4 col-xl-3`.
+- I did not write any CSS or link `styles.css` on this page.
 
-### Columnas observadas (modo dispositivo)
-| Ancho | Breakpoint activo | Columnas |
+### Observed Columns (Device Mode)
+
+| Width | Active Breakpoint | Columns |
 |---|---|---|
-| 360 px | ninguno (`col-12`) | 1 |
-| 600 px | `sm` (desde 576 px) | 2 |
-| 800 px | `sm` (`md` no lo usé) | 2 |
-| 1000 px | `lg` (desde 992 px) | 3 |
-| 1280 px | `xl` (desde 1200 px) | 4 |
+| 360 px | None (`col-12`) | 1 |
+| 600 px | `sm` (from 576 px) | 2 |
+| 800 px | `sm` (`md` was not used) | 2 |
+| 1000 px | `lg` (from 992 px) | 3 |
+| 1280 px | `xl` (from 1200 px) | 4 |
 
-En Network, `bootstrap.min.css` y `bootstrap.bundle.min.js` cargan con código 200 y no aparece ningún error.
+In Network, `bootstrap.min.css` and `bootstrap.bundle.min.js` load with status code 200, and no errors appear.
 
-### Comparación
-| | CSS propio (MiniReto 2) | Bootstrap |
+### Comparison
+
+| | Custom CSS (MiniChallenge 2) | Bootstrap |
 |---|---|---|
-| Tiempo aproximado | 45 min | 20 min |
-| CSS de distribución de la flota | 7 declaraciones en 2 reglas (`.flota-grid`: display, grid-template-columns, gap; `.modelo`: display, flex-direction, justify-content, gap) | 0 líneas de CSS |
-| Clases en el HTML para la distribución | 2 (`flota-grid` y `modelo`) | 6 distintas (`row`, `g-4`, `col-12`, `col-sm-6`, `col-lg-4`, `col-xl-3`); las de columna se repiten en los 7 modelos (28 veces) |
-| Para alinear "Reservar" abajo | `justify-content: space-between` | `h-100`, `d-flex flex-column` y `mt-auto` |
-| Media queries | 0 (`auto-fit` se adapta sola) | 0 escritas por mí; Bootstrap ya las trae en sus clases |
+| Approximate Time | 45 min | 20 min |
+| Fleet Layout CSS | 7 declarations in 2 rules (`.flota-grid`: display, grid-template-columns, gap; `.modelo`: display, flex-direction, justify-content, gap) | 0 lines of CSS |
+| HTML Classes for Layout | 2 (`flota-grid` and `modelo`) | 6 different ones (`row`, `g-4`, `col-12`, `col-sm-6`, `col-lg-4`, `col-xl-3`); the column classes are repeated in all 7 models (28 times) |
+| Aligning "Book Now" at the Bottom | `justify-content: space-between` | `h-100`, `d-flex flex-column`, and `mt-auto` |
+| Media Queries | 0 (`auto-fit` adjusts automatically) | 0 written by me; Bootstrap already includes them in its classes |
 
-En la versión propia el tiempo se fue en entender `auto-fit` y `minmax()`, probar cuál ancho mínimo dejaba 3 columnas a 1280 px y 2 a 900 px, y lograr que el botón quedara abajo en todas las tarjetas. Con Bootstrap casi todo el tiempo fue copiar el marcado, cambiar las rutas de las imágenes y buscar en la documentación los nombres de las clases.
+In the custom version, most of the time was spent understanding `auto-fit` and `minmax()`, testing which minimum width allowed 3 columns at 1280 px and 2 columns at 900 px, and making sure the button stayed at the bottom of every card. With Bootstrap, almost all the time was spent copying the markup, changing the image paths, and looking up the class names in the documentation.
 
-### Qué me dio Bootstrap sin esfuerzo
-- Los breakpoints ya están hechos: solo escribo `col-sm-6` y desde 576 px ya son dos columnas.
-- Los gutters con una sola clase (`g-4`), iguales entre filas y columnas.
-- La tarjeta (`card`) ya trae borde, esquinas y relleno, y el botón trae estilos de hover y foco.
+### What Bootstrap Gave Me Without Extra Work
+- The breakpoints are already defined: I only need to write `col-sm-6`, and from 576 px onward, there are two columns.
+- Gutters with a single class (`g-4`), with equal spacing between rows and columns.
+- The card (`card`) already includes a border, rounded corners, and padding, and the button already has hover and focus styles.
 
-### Qué control perdí
-- Ahora soy yo quien decide cuántas columnas hay en cada breakpoint; antes salían del espacio disponible. Con `auto-fit`, si cambio el ancho mínimo de la tarjeta, la cuadrícula se reacomoda sola. Aquí tendría que cambiar las clases de los 7 modelos.
-- Los breakpoints son los de Bootstrap (576, 768, 992, 1200 px), no los que necesita mi contenido. Por ejemplo, a 800 px se siguen viendo 2 columnas aunque cabrían 3.
-- El HTML queda más cargado: cada modelo necesita un `div` extra para la columna, y la distribución queda mezclada con el contenido en lugar de estar en el CSS.
-- El estilo no es el de Rueda Libre (fuente y colores de la marca). Para eso tendría que sobrescribir Bootstrap.
-- La página descarga todo Bootstrap aunque solo use la grilla y la tarjeta.
+### What Control I Lost
+- Now I have to decide how many columns there are at each breakpoint; before, they were determined by the available space. With `auto-fit`, if I change the minimum card width, the grid rearranges itself automatically. Here, I would have to change the classes of all 7 models.
+- The breakpoints are Bootstrap's standard values (576, 768, 992, 1200 px), not the ones my content actually needs. For example, at 800 px, there are still 2 columns even though 3 would fit.
+- The HTML becomes more crowded: each model needs an extra `div` for the column, and the layout is mixed with the content instead of being defined in the CSS.
+- The style does not match Rueda Libre's brand identity (font and colors). I would have to override Bootstrap to achieve that.
+- The page downloads all of Bootstrap even though I only use the grid and the card.
 
-### Conclusión
-Bootstrap fue más rápido de armar, pero la versión propia se adapta mejor al contenido, deja el HTML más limpio y mantiene la identidad de la marca. Para una prueba rápida Bootstrap sirve; para la flota de Rueda Libre me quedaría con la versión en CSS propio.
+### Conclusion
+Bootstrap was faster to build, but the custom version adapts better to the content, keeps the HTML cleaner, and maintains the brand identity. Bootstrap is useful for a quick test; however, for the Rueda Libre fleet, I would choose the custom CSS version.

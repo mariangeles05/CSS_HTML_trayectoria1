@@ -2,13 +2,16 @@
 
 This week, the site evolved from looking good only on a computer to working across mobile, tablet, and desktop. I worked with Flexbox, Grid, and media queries, and also experimented with Bootstrap (version v1.5) for comparison.
 
-Mini-Challenge 1 · Flexbox in the header and footer
+### Mini-Challenge 1· Flexbox in the header and footer
 I grouped the logo and the name into a `.marca` container so that the header would have only two direct children.
 The header uses `display: flex`, `justify-content: space-between` (placing the brand on one side and the menu on the other), and `align-items: center`.
+
 The menu is flexible, utilizing `gap` and `flex-wrap: wrap`, which allows it to wrap to the next line instead of overflowing.
 The footer contains three blocks arranged in a row, aligned to the top using `align-items: flex-start`.
 I used `gap` instead of margins because it only adds spacing between elements, avoiding unnecessary extra space at the edges.
-Mini-Challenge 2 · The fleet using Grid
+
+
+### Mini-Challenge 2 · The fleet using Grid
 I built the "Our Fleet" section, featuring 7 models. Each model is an `article` containing a photo, name, description, price, and a "Book" button.
 
 .flota-grid {
@@ -24,7 +27,8 @@ Width	Columns
 1280 px	3
 900 px	2
 500 px	1
-Mini-Challenge 3 · Desktop layout
+
+### Mini-Challenge 3 · Desktop layout
 Section	What I used	Why
 Hero/Cover	Grid 1fr 1fr	Text and photo each occupy exactly half the space; `align-items: center` centers the text.
 Route Gallery: `Grid repeat(3, 1fr)` — A grid of three identical cards.
@@ -34,7 +38,7 @@ Header: `Flexbox` — A single row where each element is sized according to its 
 Footer: `Flexbox` — Blocks of varying sizes that stack using `wrap`.
 My rule of thumb: use `Flexbox` for a single-direction layout; use `Grid` when you need to define columns or align both rows and columns simultaneously.
 
-Mini-Challenge 4 · Mobile-first
+### Mini-Challenge 4 · Mobile-first
 I reorganized `styles.css` so that the styles outside of any media queries represent the mobile version—everything in a single column. Then, I added only the necessary changes:
 
 From 768px: Header and footer in a row, the hero section in two columns, routes in three, and the document and mobile phone fields grouped together.

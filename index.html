@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explora las diferentes etapas del proyecto Rueda Libre, una propuesta de movilidad en bicicleta por Medellín.">
+  <title>Rueda Libre | Explora el proyecto</title>
+  <style>
+    body {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      background: #fff;
+      color: #26352d;
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid #e5e5e5;
+      color: #356b4b;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 48px 0 36px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #52705e;
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      margin: 0;
+      color: #244b35;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.2;
+    }
+
+    .intro {
+      max-width: 650px;
+      margin: 14px 0 0;
+      color: #5b665f;
+    }
+
+    .versions {
+      padding: 12px 0 48px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 4px;
+      font-size: 1.6rem;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: #68736c;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid #dedede;
+      border-radius: 8px;
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 160px;
+      background: #f1f3f1;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 16px;
+    }
+
+    .day {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: #52705e;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    h3 {
+      margin: 0 0 6px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      color: #5b665f;
+      font-size: 0.95rem;
+    }
+
+    .card a {
+      color: #356b4b;
+      font-weight: bold;
+    }
+
+    footer {
+      padding: 18px 0 24px;
+      border-top: 1px solid #e1e1d8;
+      color: #68736c;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>RUEDA LIBRE</header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Un proyecto en movimiento</p>
+      <h1 id="page-title">Pedalea Medellín a tu manera.</h1>
+      <p class="intro">Conoce la evolución de Rueda Libre: una propuesta para descubrir la ciudad sobre dos ruedas, desde sus primeros pasos hasta su versión más completa.</p>
+    </section>
+
+    <section class="versions" aria-labelledby="versions-title">
+      <div class="section-heading">
+        <h2 id="versions-title">Explora el proyecto</h2>
+        <p>Tres etapas, una misma aventura.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <img src="rueda-libre/img/portad.webp" alt="Ciclistas recorriendo una ciclorruta de Medellín" width="800" height="450">
+          <div class="card-content">
+            <span class="day">Etapa 01</span>
+            <h3>Los primeros pasos</h3>
+            <p>La idea inicial de Rueda Libre y sus servicios principales.</p>
+            <a href="rueda-libre/index.html">Visitar versión <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="rueda-libreDia2/rueda-libre/img/portad.webp" alt="Ilustración de ciclistas en una ruta urbana" width="800" height="450">
+          <div class="card-content">
+            <span class="day">Etapa 02</span>
+            <h3>Una experiencia más clara</h3>
+            <p>Una estructura renovada para explorar el sitio con facilidad.</p>
+            <a href="rueda-libreDia2/rueda-libre/index.html">Visitar versión <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="rueda-libreDia3/rueda-libre/img/portad.webp" alt="Ilustración de bicicletas con Medellín al fondo" width="800" height="450">
+          <div class="card-content">
+            <span class="day">Etapa 03</span>
+            <h3>Rueda Libre hoy</h3>
+            <p>La versión más completa, con estilos y nuevas opciones.</p>
+            <a href="rueda-libreDia3/rueda-libre/index.html">Visitar versión <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>Rueda Libre · Proyecto de aprendizaje · Medellín, Colombia</footer>
+</body>
+</html>

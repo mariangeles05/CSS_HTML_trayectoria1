@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kit de componentes de la campaña Rueda Nocturna: botones, cards, alertas y campos de formulario.">
+  <title>Kit de componentes · Rueda Nocturna | Rueda Libre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="src/output.css">
+</head>
+<body class="dark:scheme-dark font-texto bg-crema text-azul-noche dark:bg-azul-noche dark:text-crema">
+  <header class="px-6 py-6 border-b border-gris-asfalto/20 bg-white dark:border-white/10 dark:bg-azul-noche">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-sm font-semibold uppercase tracking-widest text-verde-ruta dark:text-amarillo-farol">Rueda Nocturna · v0.1</p>
+      <h1 class="mt-2 font-titulos text-4xl font-extrabold">Kit de componentes</h1>
+      <p class="mt-2 text-gris-asfalto dark:text-crema/80">Si el kit es consistente, la landing se arma sola. <a href="index.html" class="font-semibold underline rounded text-verde-ruta dark:text-amarillo-farol hover:text-azul-noche dark:hover:text-crema focus:outline-none focus:ring-4 focus:ring-azul-noche focus:ring-offset-2 focus:ring-offset-crema dark:focus:ring-amarillo-farol dark:focus:ring-offset-azul-noche">Ver la landing</a></p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto space-y-16 px-6 py-12">
+    <section aria-labelledby="titulo-botones">
+      <h2 id="titulo-botones" class="mb-6 font-titulos text-2xl font-bold">Botones</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href="index.html#inscripcion" class="btn-principal">Inscríbete</a>
+        <a href="index.html#rutas" class="btn-secundario">Ver rutas</a>
+        <a href="index.html#como-funciona" class="btn-contorno">¿Cómo funciona?</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-card">
+      <h2 id="titulo-card" class="mb-6 font-titulos text-2xl font-bold">Card de ruta</h2>
+      <div class="max-w-sm">
+        <article class="overflow-hidden rounded-lg border border-gris-asfalto/30 bg-white shadow-md dark:border-white/15 dark:bg-white/5 hover:border-verde-ruta hover:shadow-xl dark:hover:border-amarillo-farol">
+          <img src="img/luces-del-centro.jpg" alt="Ciclista de noche por una ciclorruta del centro de Medellín" class="h-48 w-full object-cover" width="640" height="400">
+          <div class="p-6">
+            <p class="inline-block mb-3 px-3 py-1 text-xs font-bold uppercase tracking-wide rounded-full bg-verde-ruta text-white">Nivel fácil</p>
+            <h3 class="mb-4 font-titulos text-2xl font-bold">Luces del Centro</h3>
+            <dl class="mb-6 space-y-3">
+              <div>
+                <dt class="text-xs uppercase tracking-wide text-gris-asfalto dark:text-crema/75">Distancia</dt>
+                <dd class="text-lg font-semibold">10 km</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wide text-gris-asfalto dark:text-crema/75">Duración</dt>
+                <dd class="text-lg font-semibold">2 h</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wide text-gris-asfalto dark:text-crema/75">Punto de encuentro</dt>
+                <dd class="text-lg font-semibold">Sede Rueda Libre</dd>
+              </div>
+            </dl>
+            <p class="mb-6"><span class="text-3xl font-extrabold text-verde-ruta dark:text-amarillo-farol">$55.000</span> <span class="text-sm text-gris-asfalto dark:text-crema/75">por persona</span></p>
+            <a href="index.html#inscripcion" class="btn-principal">Inscríbete <span class="sr-only">a Luces del Centro</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-alertas">
+      <h2 id="titulo-alertas" class="mb-6 font-titulos text-2xl font-bold">Alertas</h2>
+      <div class="space-y-4">
+        <div class="p-4 rounded-lg border-l-4 border-azul-noche bg-azul-noche/5 dark:border-crema dark:bg-white/5">
+          <p class="font-bold">Información</p>
+          <p>Los recorridos salen a las 7:30 p. m. desde la sede de Rueda Libre.</p>
+        </div>
+        <div class="p-4 rounded-lg border-l-4 border-verde-ruta bg-verde-ruta/10 dark:bg-verde-ruta/25" role="status">
+          <p class="font-bold">¡Inscripción recibida!</p>
+          <p>Te enviamos la confirmación a tu correo.</p>
+        </div>
+        <div class="p-4 rounded-lg border-l-4 border-naranja-pedal bg-naranja-pedal/15 dark:bg-naranja-pedal/20">
+          <p class="font-bold dark:text-amarillo-farol">Atención</p>
+          <p>Si llueve, el recorrido se reprograma para el día siguiente.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-campos">
+      <h2 id="titulo-campos" class="mb-6 font-titulos text-2xl font-bold">Campos de formulario</h2>
+      <div class="max-w-md space-y-6">
+        <div>
+          <label for="kit-correo" class="block mb-2 font-semibold">Correo electrónico</label>
+          <input type="email" id="kit-correo" name="correo" placeholder="nombre@correo.com" aria-describedby="ayuda-kit-correo" class="w-full px-4 py-3 rounded-lg border border-gris-asfalto bg-white text-azul-noche dark:border-crema/40 dark:bg-white/5 dark:text-crema placeholder:text-gris-asfalto dark:placeholder:text-crema/70 focus:border-verde-ruta dark:focus:border-amarillo-farol focus:outline-none focus:ring-4 focus:ring-azul-noche focus:ring-offset-2 focus:ring-offset-crema dark:focus:ring-amarillo-farol dark:focus:ring-offset-azul-noche">
+          <p id="ayuda-kit-correo" class="mt-2 text-sm text-gris-asfalto dark:text-crema/75">Ahí te llega la confirmación de la inscripción.</p>
+        </div>
+        <div>
+          <label for="kit-celular" class="block mb-2 font-semibold">Celular</label>
+          <input type="tel" id="kit-celular" name="celular" placeholder="3001234567" aria-describedby="ayuda-kit-celular" class="w-full px-4 py-3 rounded-lg border border-gris-asfalto bg-white text-azul-noche dark:border-crema/40 dark:bg-white/5 dark:text-crema placeholder:text-gris-asfalto dark:placeholder:text-crema/70 focus:border-verde-ruta dark:focus:border-amarillo-farol focus:outline-none focus:ring-4 focus:ring-azul-noche focus:ring-offset-2 focus:ring-offset-crema dark:focus:ring-amarillo-farol dark:focus:ring-offset-azul-noche">
+          <p id="ayuda-kit-celular" class="mt-2 text-sm text-gris-asfalto dark:text-crema/75">10 dígitos, empieza por 3.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

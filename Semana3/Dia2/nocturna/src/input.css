@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Tema de Rueda Libre: los mismos colores y fuentes del sitio principal + Amarillo Farol */
+@theme {
+  --color-verde-ruta: #1E7A4F;
+  --color-naranja-pedal: #F39A2B;
+  --color-azul-noche: #14213D;
+  --color-crema: #FAF6EF;
+  --color-gris-asfalto: #5B6470;
+  --color-amarillo-farol: #FFD166;
+
+  --font-titulos: "Montserrat", Arial, sans-serif;
+  --font-texto: "Open Sans", Helvetica, sans-serif;
+}
+
+/* Botones del kit: el único elemento pequeño que se repite mucho (8 veces en la landing).
+   Máximo tres clases propias; el resto del marcado se queda con utilidades. */
+@layer components {
+  .btn-principal {
+    @apply inline-block px-6 py-3 font-semibold rounded-lg border-2 border-transparent bg-verde-ruta text-white shadow-md dark:hover:bg-crema dark:hover:text-azul-noche hover:bg-azul-noche hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-azul-noche focus:ring-offset-2 focus:ring-offset-crema dark:focus:ring-amarillo-farol dark:focus:ring-offset-azul-noche;
+  }
+
+  .btn-secundario {
+    @apply inline-block px-6 py-3 font-semibold rounded-lg border-2 border-transparent bg-amarillo-farol text-azul-noche shadow-md hover:bg-naranja-pedal hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-azul-noche focus:ring-offset-2 focus:ring-offset-crema dark:focus:ring-amarillo-farol dark:focus:ring-offset-azul-noche;
+  }
+
+  .btn-contorno {
+    @apply inline-block px-6 py-3 font-semibold rounded-lg border-2 border-azul-noche text-azul-noche dark:border-crema dark:text-crema hover:bg-azul-noche hover:text-white dark:hover:bg-crema dark:hover:text-azul-noche focus:outline-none focus:ring-4 focus:ring-azul-noche focus:ring-offset-2 focus:ring-offset-crema dark:focus:ring-amarillo-farol dark:focus:ring-offset-azul-noche;
+  }
+}

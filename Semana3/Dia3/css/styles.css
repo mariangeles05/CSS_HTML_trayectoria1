@@ -1,0 +1,379 @@
+/* ==========================================================
+   Rueda Libre v2.0 · Identidad visual sobre Bootstrap 5.3
+   Se carga después de Bootstrap. La distribución la hacen
+   la grilla y las utilidades; aquí solo queda la marca:
+   variables, tipografía, colores, estados y clases propias.
+   ========================================================== */
+
+/* 1. Variables de la marca */
+:root {
+  --verde-ruta: #1E7A4F;
+  --naranja-pedal: #F39A2B;
+  --azul-noche: #14213D;
+  --crema: #FAF6EF;
+  --gris-asfalto: #5B6470;
+  --amarillo-farol: #FFD166; /* color de la campaña Rueda Nocturna (semana 3) */
+  --blanco: #FFFFFF;
+
+  --fuente-titulos: "Montserrat", Arial, sans-serif;
+  --fuente-texto: "Open Sans", Helvetica, sans-serif;
+
+  --esp-s: 0.5rem;
+  --esp-m: 1rem;
+  --esp-l: 1.5rem;
+  --esp-xl: 2.5rem;
+
+  /* Variables globales de Bootstrap con los valores de la marca */
+  --bs-primary: #1E7A4F;
+  --bs-primary-rgb: 30, 122, 79;
+  --bs-dark: #14213D;
+  --bs-dark-rgb: 20, 33, 61;
+  --bs-body-font-family: var(--fuente-texto);
+  --bs-body-color: #14213D;
+  --bs-body-color-rgb: 20, 33, 61;
+  --bs-body-bg: #FAF6EF;
+  --bs-body-bg-rgb: 250, 246, 239;
+  --bs-secondary-color: #5B6470;
+  --bs-heading-color: #14213D;
+  --bs-link-color: #1E7A4F;
+  --bs-link-color-rgb: 30, 122, 79;
+  --bs-link-hover-color: #14213D;
+  --bs-link-hover-color-rgb: 20, 33, 61;
+  --bs-border-radius: 0.5rem;
+  --bs-border-radius-sm: 0.375rem;
+  --bs-border-radius-lg: 1rem;
+  /* Mensajes de validación: el rojo de Bootstrap (#dc3545) solo da 4.2:1 sobre Crema */
+  --bs-form-valid-color: #1E7A4F;
+  --bs-form-valid-border-color: #1E7A4F;
+  --bs-form-invalid-color: #B02A37;
+  --bs-form-invalid-border-color: #B02A37;
+}
+
+/* 2. Base y tipografía */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* La fuente, el color y el fondo del cuerpo salen de --bs-body-* */
+body {
+  padding-bottom: 5rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3, legend {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  color: var(--azul-noche);
+}
+
+/* El reboot de Bootstrap agranda los títulos; mantengo los tamaños de la v1.5 */
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.17rem;
+}
+
+/* El color de los enlaces sale de --bs-link-color */
+a {
+  font-weight: 600;
+}
+
+caption {
+  color: var(--gris-asfalto);
+}
+
+/* 3. Encabezado y navbar */
+header {
+  background-color: var(--blanco);
+  border-bottom: 1px solid var(--gris-asfalto);
+}
+
+.navbar-brand {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+}
+
+/* Variables de la navbar: los enlaces en Gris Asfalto y el activo en Verde Ruta */
+.navbar {
+  --bs-navbar-color: #5B6470;
+  --bs-navbar-hover-color: #14213D;
+  --bs-navbar-active-color: #1E7A4F;
+  --bs-navbar-brand-color: #14213D;
+  --bs-navbar-brand-hover-color: #1E7A4F;
+}
+
+/* 4. Botones: variables del componente (--bs-btn-*) */
+.btn-primary {
+  --bs-btn-bg: #1E7A4F;
+  --bs-btn-border-color: #1E7A4F;
+  --bs-btn-hover-bg: #14213D;
+  --bs-btn-hover-border-color: #14213D;
+  --bs-btn-active-bg: #14213D;
+  --bs-btn-active-border-color: #14213D;
+  --bs-btn-disabled-bg: #1E7A4F;
+  --bs-btn-disabled-border-color: #1E7A4F;
+  --bs-btn-focus-shadow-rgb: 243, 154, 43;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #1E7A4F;
+  --bs-btn-border-color: #1E7A4F;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: #1E7A4F;
+  --bs-btn-hover-border-color: #1E7A4F;
+  --bs-btn-active-color: #FFFFFF;
+  --bs-btn-active-bg: #14213D;
+  --bs-btn-active-border-color: #14213D;
+  --bs-btn-focus-shadow-rgb: 243, 154, 43;
+}
+
+/* Variante propia: Naranja Pedal con texto Azul Noche (7.20:1); hover Azul Noche con texto blanco */
+.btn-pedal {
+  --bs-btn-color: #14213D;
+  --bs-btn-bg: #F39A2B;
+  --bs-btn-border-color: #F39A2B;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: #14213D;
+  --bs-btn-hover-border-color: #F39A2B;
+  --bs-btn-active-color: #FFFFFF;
+  --bs-btn-active-bg: #14213D;
+  --bs-btn-active-border-color: #14213D;
+  --bs-btn-focus-shadow-rgb: 243, 154, 43;
+  font-weight: 700;
+}
+
+/* 5. Estados de foco: contorno Naranja Pedal en todo lo que recibe el foco.
+   .btn:focus-visible (conflicto 2 del MiniReto 7) y los controles del carrusel
+   necesitan su propio selector porque Bootstrap les quita el outline con (0,2,0). */
+a:focus,
+.btn:focus-visible,
+.carousel-control-prev:focus-visible,
+.carousel-control-next:focus-visible,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--naranja-pedal);
+  outline-offset: 3px;
+}
+
+/* Los campos y casillas de Bootstrap no tienen variables para el foco y el estado marcado
+   (traen el azul #86b7fe / #0d6efd fijo): les pongo los colores de la marca */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: var(--verde-ruta);
+  outline: 3px solid var(--naranja-pedal);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.form-check-input:checked {
+  background-color: var(--verde-ruta);
+  border-color: var(--verde-ruta);
+}
+
+/* 6. Clases propias */
+
+/* Título de la portada: más grande que los h2 de sección */
+.portada-titulo {
+  font-size: 2.25rem;
+  line-height: 1.2;
+}
+
+/* Títulos de sección con la barra Naranja Pedal */
+.titulo-seccion {
+  padding-left: 0.75rem;
+  border-left: 0.4rem solid var(--naranja-pedal);
+}
+
+/* Pie de página de las tres páginas */
+.pie {
+  padding: var(--esp-xl) 0;
+  color: var(--blanco);
+  background-color: var(--azul-noche);
+}
+
+.pie h2 {
+  margin: 0 0 var(--esp-s);
+  font-size: 1.1rem;
+  color: var(--blanco);
+}
+
+.pie p {
+  margin: 0;
+}
+
+.pie a {
+  color: var(--blanco);
+  overflow-wrap: anywhere;
+}
+
+.pie a:hover {
+  color: var(--naranja-pedal);
+}
+
+.portada img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 50vh;
+  object-fit: cover;
+  border-radius: var(--esp-m);
+}
+
+.etiqueta {
+  position: absolute;
+  z-index: 1;
+  top: var(--esp-m);
+  right: var(--esp-m);
+  margin: 0;
+  padding: 0.25rem var(--esp-m);
+  background-color: var(--naranja-pedal);
+  color: var(--azul-noche);
+  font-weight: 600;
+  border-radius: var(--esp-l);
+}
+
+/* Botón flotante de WhatsApp (semana 1): ahora solo con ícono y aria-label */
+.whatsapp {
+  position: fixed;
+  right: var(--esp-l);
+  bottom: var(--esp-l);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.75rem;
+  color: var(--blanco);
+  text-decoration: none;
+  background-color: var(--verde-ruta);
+  border-radius: 50%;
+}
+
+.whatsapp:hover,
+.whatsapp:focus {
+  color: var(--blanco);
+  background-color: var(--azul-noche);
+}
+
+.dato {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+}
+
+.franja {
+  color: var(--blanco);
+  background-color: var(--azul-noche);
+}
+
+.franja h2 {
+  color: var(--blanco);
+}
+
+.precio {
+  font-family: var(--fuente-titulos);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.precio span {
+  font-family: var(--fuente-texto);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--gris-asfalto);
+}
+
+.nivel {
+  margin: 0;
+  color: var(--gris-asfalto);
+  font-weight: 600;
+}
+
+/* 7. Tablas (estilo de la semana 1) */
+table {
+  width: 100%;
+  margin-bottom: var(--esp-l);
+  border-collapse: collapse;
+  background-color: var(--blanco);
+  font-size: 0.8rem;
+}
+
+caption {
+  padding: var(--esp-s);
+  font-weight: 600;
+  caption-side: top;
+}
+
+th,
+td {
+  padding: 0.35rem 0.4rem;
+  text-align: left;
+  border: 1px solid var(--gris-asfalto);
+}
+
+thead th {
+  color: var(--blanco);
+  background-color: var(--azul-noche);
+}
+
+tbody th {
+  background-color: var(--crema);
+}
+
+aside {
+  padding: var(--esp-m) var(--esp-l);
+  background-color: var(--blanco);
+  border-left: 4px solid var(--naranja-pedal);
+  border-radius: var(--esp-s);
+}
+
+.contacto h2 {
+  margin-top: 0;
+}
+
+/* 8. Formulario */
+fieldset {
+  margin: 0 0 var(--esp-l);
+  padding: var(--esp-l);
+  background-color: var(--blanco);
+  border: 1px solid var(--gris-asfalto);
+  border-radius: var(--esp-m);
+}
+
+fieldset fieldset {
+  padding: var(--esp-m);
+  background-color: var(--crema);
+}
+
+/* Conflicto del MiniReto 8: el reboot de Bootstrap pone el legend flotando dentro
+   del recuadro y más grande; lo devuelvo al borde del fieldset como en la v1.5 */
+legend {
+  float: none;
+  width: auto;
+  margin-bottom: 0;
+  padding: 0 var(--esp-s);
+  font-size: 1.25rem;
+}
+
+/* 9. Ajustes de tamaño por pantalla (solo apariencia, no distribución) */
+@media (min-width: 768px) {
+  table {
+    font-size: 1rem;
+  }
+
+  th,
+  td {
+    padding: var(--esp-s) var(--esp-m);
+  }
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explora los tres días de Rueda Nocturna, la landing en Tailwind CSS de Rueda Libre para recorrer Medellín en bicicleta de noche.">
+  <title>Rueda Nocturna | Explora la semana 3</title>
+  <style>
+    body {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      background: #14213D;
+      color: #FAF6EF;
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid #2E3B57;
+      color: #FFD166;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+    }
+
+    .hero {
+      padding: 48px 0 36px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #FFD166;
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      margin: 0;
+      color: #FFFFFF;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.2;
+    }
+
+    .intro {
+      max-width: 650px;
+      margin: 14px 0 0;
+      color: #D9DCE3;
+    }
+
+    .versions {
+      padding: 12px 0 48px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 4px;
+      font-size: 1.6rem;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: #D9DCE3;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      overflow: hidden;
+      background: #1C2B4A;
+      border: 1px solid #2E3B57;
+      border-radius: 8px;
+    }
+
+    .card:hover {
+      border-color: #FFD166;
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 16px;
+    }
+
+    .day {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: #FFD166;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    h3 {
+      margin: 0 0 6px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      color: #D9DCE3;
+      font-size: 0.95rem;
+    }
+
+    .card a {
+      color: #FFD166;
+      font-weight: bold;
+    }
+
+    .card a:focus {
+      outline: 3px solid #F39A2B;
+      outline-offset: 3px;
+    }
+
+    footer {
+      padding: 18px 0 24px;
+      border-top: 1px solid #2E3B57;
+      color: #D9DCE3;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>RUEDA NOCTURNA</header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Semana 3 · Tailwind CSS</p>
+      <h1 id="page-title">Medellín se recorre mejor cuando se encienden las luces.</h1>
+      <p class="intro">Conoce cómo se construyó Rueda Nocturna, la landing de los recorridos guiados de noche de Rueda Libre: del primer prototipo al lanzamiento integrado con el sitio.</p>
+    </section>
+
+    <section class="versions" aria-labelledby="versions-title">
+      <div class="section-heading">
+        <h2 id="versions-title">Explora la semana</h2>
+        <p>Tres días, una misma noche.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <img src="Dia1/nocturna/img/miradores-de-la-ciudad.jpg" alt="Ciclistas de noche en un mirador de Medellín" width="800" height="450">
+          <div class="card-content">
+            <span class="day">Día 01</span>
+            <h3>El kit de componentes</h3>
+            <p>Prototipo, botones, cards de rutas y la página de componentes.</p>
+            <a href="Dia1/nocturna/componentes.html">Visitar versión <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="Dia2/nocturna/img/luna-en-las-palmas.jpg" alt="Ciclista de noche en la vía de Las Palmas" width="800" height="450">
+          <div class="card-content">
+            <span class="day">Día 02</span>
+            <h3>La landing completa</h3>
+            <p>Responsive, con los colores de la marca y modo oscuro.</p>
+            <a href="Dia2/nocturna/index.html">Visitar versión <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="Dia3/nocturna/img/luces-del-centro.jpg" alt="Ciclista de noche por una ciclorruta del centro de Medellín" width="800" height="450">
+          <div class="card-content">
+            <span class="day">Día 03</span>
+            <h3>El lanzamiento</h3>
+            <p>Inscripción, planes y la landing conectada con el sitio.</p>
+            <a href="Dia3/nocturna/index.html">Visitar versión <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>Rueda Libre · Semana 3 · Rueda Nocturna · Medellín, Colombia</footer>
+</body>
+</html>
